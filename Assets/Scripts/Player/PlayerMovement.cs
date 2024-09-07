@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.05f, whatIsGround);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f, whatIsGround);
 
         MyInput();
         SpeedControl();
@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        if (Input.GetKey(jumpKey) && readytoJump && grounded)
+        if (Input.GetKeyDown(jumpKey) && readytoJump && grounded)
         {
             readytoJump = false;
 
