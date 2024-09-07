@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    protected StateMachine stateMachine = new();
+    [SerializeField] private GameObject playerMesh;
+
+    private readonly StateMachine stateMachine = new();
 
     private void Awake()
     {
@@ -16,6 +18,19 @@ public class Player : Entity
     {
         stateMachine.Update();
         SelectWeapon();
+    }
+
+    public override void TakeDamage(int dmg)
+    {
+        base.TakeDamage(dmg);
+
+        Debug.Log("health: " + health);
+    }
+
+    protected override void Die()
+    {
+        Debug.Log("died");
+        playerMesh.GetComponent<Renderer>().enabled = false;
     }
 
     private void SelectWeapon()

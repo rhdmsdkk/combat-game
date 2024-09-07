@@ -6,7 +6,7 @@ public class Entity : MonoBehaviour
 {
     [SerializeField] protected int health;
 
-    protected void TakeDamage(int dmg)
+    public virtual void TakeDamage(int dmg)
     {
         health -= dmg;
 
@@ -16,7 +16,7 @@ public class Entity : MonoBehaviour
         }
     }
 
-    protected void Die()
+    protected virtual void Die()
     {
         Destroy(gameObject);
     }

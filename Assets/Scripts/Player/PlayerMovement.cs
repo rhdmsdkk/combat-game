@@ -5,7 +5,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    public float movementSpeed;
+    public float runSpeed;
+    public float walkSpeed;
+
+    private float movementSpeed;
+    private bool isWalking;
 
     public float groundDrag;
 
@@ -14,8 +18,12 @@ public class PlayerMovement : MonoBehaviour
     public float airMultiplier;
     bool readytoJump;
 
+    [Header("Animation")]
+    public Animator animator;
+
     [Header("Keys")]
     public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode walkToggleKey = KeyCode.LeftControl;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -36,6 +44,9 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         readytoJump = true;
+
+        isWalking = false;
+        movementSpeed = runSpeed;
     }
 
     private void Update()
@@ -44,6 +55,9 @@ public class PlayerMovement : MonoBehaviour
 
         MyInput();
         SpeedControl();
+
+        CheckForMovementAnimation();
+        CheckForMovementSpeed();
 
         if (grounded)
         {
@@ -58,6 +72,34 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
+    }
+
+    private void CheckForMovementAnimation()
+    {
+        if (rb.velocity == Vector3.zero)
+        {
+            animator.SetBool("isMoving", false);
+            return;
+        }
+
+        animator.SetBool("isMoving", true);
+    }
+
+    private void CheckForMovementSpeed()
+    {
+        if (Input.GetKeyDown(walkToggleKey))
+        {
+            isWalking = !isWalking;
+        }
+
+        if (isWalking)
+        {
+            movementSpeed = walkSpeed;
+        }
+        else
+        {
+            movementSpeed = runSpeed;
+        }
     }
 
     private void MyInput()
