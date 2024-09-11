@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class Player : Entity
 {
+    [Header("Setup")]
     [SerializeField] private GameObject playerMesh;
+
+    [Header("Attributes")]
+    [SerializeField] private int playerHealth;
 
     private readonly StateMachine stateMachine = new();
 
     private void Awake()
     {
-        health = 10;
+        health = playerHealth;
         stateMachine.Initialize(this, new MeleeState());
     }
 
