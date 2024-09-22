@@ -4,15 +4,17 @@ using UnityEngine;
 public class Player : Entity
 {
     [Header("Setup")]
-    [SerializeField] private GameObject playerMesh;
-    [SerializeField] public Transform orientation;
+    public GameObject playerMesh;
+    public Transform orientation;
+    public Animator animator;
 
     [Header("Attributes")]
-    [SerializeField] private float runSpeed = 5f;
-    [SerializeField] private float sprintSpeed = 10f;
-    [SerializeField] public float dashForce = 10f;
-    [SerializeField] public float dashDuration = 1.5f;
-    [SerializeField] public float rotationSpeed = 10f;
+    public float runSpeed = 5f;
+    public float sprintSpeed = 10f;
+    public float dashForce = 10f;
+    public float dashDuration = 1.5f;
+    public float dashCooldown = 2f;
+    public float rotationSpeed = 10f;
 
     // inputs
     [NonSerialized] public float horizontalInput = 0;
@@ -48,28 +50,26 @@ public class Player : Entity
     }
 
     #region General
-    public override void TakeDamage(int dmg)
-    {
-        base.TakeDamage(dmg);
-
-        Debug.Log("health: " + health);
-    }
-
     protected override void Die()
     {
-        Debug.Log("died");
         playerMesh.GetComponent<Renderer>().enabled = false;
+
+        Destroy(this);
     }
     #endregion
 
     #region Movement
+    private float elapsedTime;
     public void CheckPlayerInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        elapsedTime += Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && elapsedTime > dashCooldown)
         {
+            elapsedTime = 0;
             shouldDash = true;
         }
         else
@@ -100,6 +100,8 @@ public class Player : Entity
             Quaternion targetRotation = Quaternion.LookRotation(movementDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
+
+        animator.SetBool("isMoving", true);
     }
 
     public void SetRunSpeed()

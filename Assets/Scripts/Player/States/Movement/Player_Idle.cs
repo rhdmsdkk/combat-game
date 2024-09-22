@@ -4,15 +4,14 @@ public class Player_Idle : State<Player_Input>
 {
     private Player player;
     private Vector3 lastTransform;
-    private Quaternion lastRotation;
 
     public override void Enter(Player_Input input)
     {
         player = input.player;
 
-        lastTransform = player.transform.position;
+        player.animator.SetBool("isMoving", false);
 
-        lastRotation = player.transform.rotation;
+        lastTransform = player.transform.position;
     }
 
     public override void Update(Player_Input input)
@@ -38,7 +37,6 @@ public class Player_Idle : State<Player_Input>
 
     public override void Exit(Player_Input input)
     {
-        // stuff
     }
 
     private void CheckSlope()

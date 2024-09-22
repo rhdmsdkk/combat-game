@@ -33,12 +33,10 @@ public class Player_Dash : State<Player_Input>
 
     public override void FixedUpdate(Player_Input input)
     {
-        // stuff
     }
 
     public override void Exit(Player_Input input)
     {
-        // stuff
     }
 
     private void Dash()
