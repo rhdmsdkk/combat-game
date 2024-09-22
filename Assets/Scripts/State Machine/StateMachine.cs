@@ -21,4 +21,9 @@ public class StateMachine<T> where T : StateInput
     {
         State?.Update(Input);
     }
+
+    public void FixedUpdate()
+    {
+        State?.FixedUpdate(Input);
+    }
 }

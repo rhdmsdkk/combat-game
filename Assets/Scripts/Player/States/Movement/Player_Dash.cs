@@ -10,8 +10,6 @@ public class Player_Dash : State<Player_Input>
         player = input.player;
 
         Dash();
-
-        Debug.Log("dash");
     }
 
     public override void Update(Player_Input input)
@@ -33,16 +31,25 @@ public class Player_Dash : State<Player_Input>
         }
     }
 
+    public override void FixedUpdate(Player_Input input)
+    {
+        // stuff
+    }
+
     public override void Exit(Player_Input input)
     {
-        player.isDashing = false;
+        // stuff
     }
 
     private void Dash()
     {
-        if (player.movementDirection != Vector3.zero)
+        if (player.movementDirection.magnitude > 0.1)
         {
             player.rb.AddForce(player.movementDirection * player.dashForce, ForceMode.Impulse);
+        }
+        else
+        {
+            player.rb.AddForce(player.transform.forward * player.dashForce, ForceMode.Impulse);
         }
     }
 }

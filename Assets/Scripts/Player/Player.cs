@@ -12,6 +12,7 @@ public class Player : Entity
     [SerializeField] private float sprintSpeed = 10f;
     [SerializeField] public float dashForce = 10f;
     [SerializeField] public float dashDuration = 1.5f;
+    [SerializeField] public float rotationSpeed = 10f;
 
     // inputs
     [NonSerialized] public float horizontalInput = 0;
@@ -39,6 +40,11 @@ public class Player : Entity
     private void Update()
     {
         movementStateMachine.Update();
+    }
+
+    private void FixedUpdate()
+    {
+        movementStateMachine.FixedUpdate();
     }
 
     #region General
@@ -88,6 +94,12 @@ public class Player : Entity
         movementDirection.y = 0;
 
         rb.velocity = movementDirection * movementSpeed + new Vector3(0, rb.velocity.y, 0);
+
+        if (movementDirection != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(movementDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        }
     }
 
     public void SetRunSpeed()
