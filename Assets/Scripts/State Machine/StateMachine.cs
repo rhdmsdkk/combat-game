@@ -1,28 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class StateMachine
+public class StateMachine<T> where T : StateInput
 {
-    public State State { get; private set; }
-    public Entity Entity { get; private set; }
+    public State<T> State { get; private set; }
+    public T Input { get; private set; }
 
-    public void Initialize(Entity entity, State initState)
+    public void Initialize(T input, State<T> initState)
     {
-        Entity = entity;
-        State = initState;
+        Input = input;
+        SetState(initState);
     }
 
-    public void SetState(State newState)
+    public void SetState(State<T> newState)
     {
-        State?.Exit(Entity);
+        State?.Exit(Input);
 
         State = newState;
-        State.Enter(Entity);
+        State.Enter(Input);
     }
 
     public void Update()
     {
-        State?.Update(Entity);
+        State?.Update(Input);
     }
 }

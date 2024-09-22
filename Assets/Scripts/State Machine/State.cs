@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public abstract class State
+public abstract class State<T> where T : StateInput
 {
-    public abstract void Enter(Entity entity);
-    public abstract void Update(Entity entity);
-    public abstract void Exit(Entity entity);
+    public abstract void Enter(T input);
+    public abstract void Update(T input);
+    public abstract void Exit(T input);
 }
+
+public abstract class StateInput { }
