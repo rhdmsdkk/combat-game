@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    [SerializeField] protected int health;
+    [SerializeField] public int health;
 
     public virtual void TakeDamage(int dmg)
     {

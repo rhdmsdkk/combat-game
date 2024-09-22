@@ -194,7 +194,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7296507}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.033833694, y: 0.1372663, z: 0.0046913964, w: 0.9899451}
+  m_LocalRotation: {x: -0.0338337, y: 0.13726628, z: 0.004691397, w: 0.9899451}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7699,7 +7699,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612840966}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0054667587, y: 0.13734435, z: 0.0007580235, w: 0.990508}
+  m_LocalRotation: {x: -0.0054667676, y: 0.13734433, z: 0.0007580247, w: 0.990508}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7943,7 +7943,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1662960477}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.02309336, y: 0.13730907, z: -0.0032021357, w: 0.99025387}
+  m_LocalRotation: {x: 0.023093352, y: 0.1373091, z: -0.0032021354, w: 0.99025387}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8905,9 +8905,10 @@ MonoBehaviour:
   health: 10
   playerMesh: {fileID: 1970066808}
   orientation: {fileID: 963194228}
-  playerHealth: 0
-  runSpeed: 10
-  sprintSpeed: 15
+  runSpeed: 5
+  sprintSpeed: 10
+  dashForce: 7
+  dashDuration: 0.3
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

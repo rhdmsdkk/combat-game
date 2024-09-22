@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player_Run : State<Player_Input>
+public class Player_Sprint : State<Player_Input>
 {
     private Player player;
 
@@ -8,11 +8,11 @@ public class Player_Run : State<Player_Input>
     {
         player = input.player;
 
-        player.SetRunSpeed();
+        player.SetSprintSpeed();
 
-        player.wasSprinting = false;
+        player.wasSprinting = true;
 
-        Debug.Log("run");
+        Debug.Log("sprint");
     }
 
     public override void Update(Player_Input input)

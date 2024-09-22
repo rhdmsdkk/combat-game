@@ -8,14 +8,17 @@ public class Player : Entity
     [SerializeField] public Transform orientation;
 
     [Header("Attributes")]
-    [SerializeField] private int playerHealth;
     [SerializeField] private float runSpeed = 5f;
     [SerializeField] private float sprintSpeed = 10f;
+    [SerializeField] public float dashForce = 10f;
+    [SerializeField] public float dashDuration = 1.5f;
 
-    [Header("Inputs")]
+    // inputs
     [NonSerialized] public float horizontalInput = 0;
     [NonSerialized] public float verticalInput = 0;
     [NonSerialized] public bool isDashing = false;
+    [NonSerialized] public bool shouldDash = false;
+    [NonSerialized] public bool wasSprinting = false;
 
     [NonSerialized] public float movementSpeed = 5f;
     [NonSerialized] public Vector3 movementDirection;
@@ -28,8 +31,6 @@ public class Player : Entity
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-
-        health = playerHealth;
 
         movementStateMachine.Initialize(new Player_Input(movementStateMachine, this), new Player_Idle());
         combatStateMachine.Initialize(new Player_Input(combatStateMachine, this), new Player_Idle());
@@ -60,6 +61,24 @@ public class Player : Entity
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            shouldDash = true;
+        }
+        else
+        {
+            shouldDash = false;
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            isDashing = true;
+        }
+        else
+        {
+            isDashing = false;
+        }
     }
 
     public void Move()
