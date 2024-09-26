@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Player : Entity
@@ -7,6 +8,10 @@ public class Player : Entity
     public GameObject playerMesh;
     public Transform orientation;
     public Animator animator;
+    public new Renderer renderer;
+    public Shader flashShader;
+
+    private Material material;
 
     [Header("Attributes")]
     public float runSpeed = 5f;
@@ -34,6 +39,7 @@ public class Player : Entity
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        material = renderer.sharedMaterial;
 
         movementStateMachine.Initialize(new Player_Input(movementStateMachine, this), new Player_Idle());
         combatStateMachine.Initialize(new Player_Input(combatStateMachine, this), new Player_Idle());
@@ -52,9 +58,12 @@ public class Player : Entity
     #region General
     protected override void Die()
     {
-        playerMesh.GetComponent<Renderer>().enabled = false;
+        StartCoroutine(IDie());
+    }
 
-        Destroy(this);
+    public override void TakeDamage(int dmg)
+    {
+        StartCoroutine(ITakeDamage(dmg));
     }
     #endregion
 
@@ -112,6 +121,28 @@ public class Player : Entity
     public void SetSprintSpeed()
     {
         movementSpeed = sprintSpeed;
+    }
+    #endregion
+
+    #region Coroutines
+    private IEnumerator ITakeDamage(int dmg)
+    {
+        base.TakeDamage(dmg);
+
+        Shader prevShader = material.shader;
+        material.shader = flashShader;
+
+        yield return new WaitForSeconds(0.2f);
+
+        material.shader = prevShader;
+    }
+
+    private IEnumerator IDie()
+    {
+        yield return new WaitForSeconds(0.25f);
+
+        playerMesh.GetComponent<Renderer>().enabled = false;
+        Destroy(this);
     }
     #endregion
 }
