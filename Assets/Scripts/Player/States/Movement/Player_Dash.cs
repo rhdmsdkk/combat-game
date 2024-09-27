@@ -4,10 +4,15 @@ public class Player_Dash : State<Player_Input>
 {
     private Player player;
     private float elapsedTime = 0;
+    private float dashDuration;
 
     public override void Enter(Player_Input input)
     {
         player = input.player;
+
+        dashDuration = player.dashDuration;
+
+        player.animator.SetBool("isDashing", true);
 
         Dash();
     }
@@ -37,6 +42,7 @@ public class Player_Dash : State<Player_Input>
 
     public override void Exit(Player_Input input)
     {
+        player.animator.SetBool("isDashing", false);
     }
 
     private void Dash()
@@ -47,6 +53,7 @@ public class Player_Dash : State<Player_Input>
         }
         else
         {
+            dashDuration *= 2f;
             player.rb.AddForce(player.transform.forward * player.dashForce, ForceMode.Impulse);
         }
     }
