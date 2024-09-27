@@ -8,10 +8,9 @@ public class Player : Entity
     public GameObject playerMesh;
     public Transform orientation;
     public Animator animator;
-    public new Renderer renderer;
-    public Shader flashShader;
+    public Material flashMaterial;
 
-    private Material material;
+    private new SkinnedMeshRenderer renderer;
 
     [Header("Attributes")]
     public float runSpeed = 5f;
@@ -39,7 +38,7 @@ public class Player : Entity
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        material = renderer.sharedMaterial;
+        renderer = playerMesh.GetComponent<SkinnedMeshRenderer>();
 
         movementStateMachine.Initialize(new Player_Input(movementStateMachine, this), new Player_Idle());
         combatStateMachine.Initialize(new Player_Input(combatStateMachine, this), new Player_Idle());
@@ -129,12 +128,13 @@ public class Player : Entity
     {
         base.TakeDamage(dmg);
 
-        Shader prevShader = material.shader;
-        material.shader = flashShader;
+        Material mat = renderer.material;
+
+        renderer.material = flashMaterial;
 
         yield return new WaitForSeconds(0.2f);
 
-        material.shader = prevShader;
+        renderer.material = mat;
     }
 
     private IEnumerator IDie()
