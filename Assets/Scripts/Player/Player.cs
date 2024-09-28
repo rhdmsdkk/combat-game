@@ -9,6 +9,8 @@ public class Player : Entity
     public Transform orientation;
     public Animator animator;
     public Material flashMaterial;
+    public Material rangedMaterial;
+    public Material meleeMaterial;
 
     private new SkinnedMeshRenderer renderer;
 
@@ -41,7 +43,7 @@ public class Player : Entity
         renderer = playerMesh.GetComponent<SkinnedMeshRenderer>();
 
         movementStateMachine.Initialize(new Player_Input(movementStateMachine, this), new Player_Idle());
-        combatStateMachine.Initialize(new Player_Input(combatStateMachine, this), new Player_Idle());
+        combatStateMachine.Initialize(new Player_Input(combatStateMachine, this), new Player_Melee_Idle());
     }
 
     private void Update()
@@ -75,6 +77,7 @@ public class Player : Entity
 
         elapsedTime += Time.deltaTime;
 
+        // movement
         if (Input.GetKeyDown(KeyCode.LeftShift) && elapsedTime > dashCooldown)
         {
             elapsedTime = 0;
@@ -92,6 +95,16 @@ public class Player : Entity
         else
         {
             isDashing = false;
+        }
+
+        // combat
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            combatStateMachine.SetState(new Player_Melee_Idle());
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            combatStateMachine.SetState(new Player_Ranged_Idle());
         }
     }
 
@@ -119,6 +132,18 @@ public class Player : Entity
     {
         movementSpeed = sprintSpeed;
     }
+
+    public void ChangeOutline(string form)
+    {
+        if (form.Equals("melee"))
+        {
+            renderer.material = new Material(meleeMaterial);
+        }
+        else
+        {
+            renderer.material = new Material(rangedMaterial);
+        }
+    }
     #endregion
 
     #region Coroutines
@@ -126,9 +151,9 @@ public class Player : Entity
     {
         base.TakeDamage(dmg);
 
-        Material mat = renderer.material;
+        Material mat = new(renderer.material);
 
-        renderer.material = flashMaterial;
+        renderer.material = new Material(flashMaterial);
 
         yield return new WaitForSeconds(0.2f);
 
