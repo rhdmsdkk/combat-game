@@ -9,7 +9,9 @@ public class Player_Idle : State<Player_Input>
     {
         player = input.player;
 
-        player.animator.SetBool("isMoving", false);
+        player.animator.SetBool("isWalking", false);
+
+        player.animator.SetBool("isSprinting", false);
 
         lastTransform = player.transform.position;
     }
@@ -22,7 +24,7 @@ public class Player_Idle : State<Player_Input>
 
         if (player.horizontalInput != 0 || player.verticalInput != 0)
         {
-            player.movementStateMachine.SetState(new Player_Run());
+            player.movementStateMachine.SetState(new Player_Walk());
         }
 
         if (player.shouldDash)

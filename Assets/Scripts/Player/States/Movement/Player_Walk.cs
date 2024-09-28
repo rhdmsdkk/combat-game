@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player_Run : State<Player_Input>
+public class Player_Walk : State<Player_Input>
 {
     private Player player;
 
@@ -9,6 +9,8 @@ public class Player_Run : State<Player_Input>
         player = input.player;
 
         player.SetRunSpeed();
+
+        player.animator.SetBool("isWalking", true);
 
         player.wasSprinting = false;
     }
@@ -35,5 +37,6 @@ public class Player_Run : State<Player_Input>
 
     public override void Exit(Player_Input input)
     {
+        player.animator.SetBool("isWalking", false);
     }
 }

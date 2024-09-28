@@ -23,7 +23,7 @@ public class Player_Dash : State<Player_Input>
 
         elapsedTime += Time.deltaTime;
 
-        if (elapsedTime >= player.dashDuration)
+        if (elapsedTime >= dashDuration)
         {
             if (player.isDashing || player.wasSprinting)
             {
@@ -31,7 +31,7 @@ public class Player_Dash : State<Player_Input>
             }
             else
             {
-                player.movementStateMachine.SetState(new Player_Run());
+                player.movementStateMachine.SetState(new Player_Walk());
             }
         }
     }

@@ -10,6 +10,8 @@ public class Player_Sprint : State<Player_Input>
 
         player.SetSprintSpeed();
 
+        player.animator.SetBool("isSprinting", true);
+
         player.wasSprinting = true;
     }
 
@@ -35,5 +37,6 @@ public class Player_Sprint : State<Player_Input>
 
     public override void Exit(Player_Input input)
     {
+        player.animator.SetBool("isSprinting", false);
     }
 }

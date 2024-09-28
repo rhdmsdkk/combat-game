@@ -108,8 +108,6 @@ public class Player : Entity
             Quaternion targetRotation = Quaternion.LookRotation(movementDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
-
-        animator.SetBool("isMoving", true);
     }
 
     public void SetRunSpeed()
