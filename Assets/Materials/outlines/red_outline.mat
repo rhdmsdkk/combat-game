@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: dmg_outline_player
+  m_Name: red_outline
   m_Shader: {fileID: -6465566751694194690, guid: 47417cdb1479b2d4ea71f1549f041387, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -94,7 +94,7 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineThickness: 0.03
+    - _OutlineThickness: 0.015
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -106,7 +106,7 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OutlineColor: {r: 1, g: 0.23611754, b: 0, a: 0}
+    - _OutlineColor: {r: 1, g: 0.23288213, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &433896527948291859
 MonoBehaviour:

@@ -8,9 +8,6 @@ public class Player : Entity
     public GameObject playerMesh;
     public Transform orientation;
     public Animator animator;
-    public Material flashMaterial;
-    public Material rangedMaterial;
-    public Material meleeMaterial;
 
     private new SkinnedMeshRenderer renderer;
 
@@ -21,6 +18,15 @@ public class Player : Entity
     public float dashDuration = 1.5f;
     public float dashCooldown = 2f;
     public float rotationSpeed = 10f;
+
+    [Header("Materials")]
+    public Material flashMaterial;
+    public Material redMat;
+    public Material blueMat;
+    public Material yellowMat;
+
+    [Header("Enemy")]
+    public Goon goon;
 
     // inputs
     [NonSerialized] public float horizontalInput = 0;
@@ -35,15 +41,15 @@ public class Player : Entity
     [NonSerialized] public Rigidbody rb;
 
     [NonSerialized] public readonly StateMachine<Player_Input> movementStateMachine = new();
-    [NonSerialized] public readonly StateMachine<Player_Input> combatStateMachine = new();
 
     private void Awake()
     {
+        entityColor = EntityColor.Red;
+
         rb = GetComponent<Rigidbody>();
         renderer = playerMesh.GetComponent<SkinnedMeshRenderer>();
 
         movementStateMachine.Initialize(new Player_Input(movementStateMachine, this), new Player_Idle());
-        combatStateMachine.Initialize(new Player_Input(combatStateMachine, this), new Player_Melee_Idle());
     }
 
     private void Update()
@@ -101,14 +107,23 @@ public class Player : Entity
             isDashing = false;
         }
 
-        // combat
+        // color
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            combatStateMachine.SetState(new Player_Melee_Idle());
+            ColorEntity(EntityColor.Red);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            combatStateMachine.SetState(new Player_Ranged_Idle());
+            ColorEntity(EntityColor.Blue);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            ColorEntity(EntityColor.Yellow);
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            goon.ColorEntity(entityColor);
         }
     }
 
@@ -136,16 +151,29 @@ public class Player : Entity
     {
         movementSpeed = sprintSpeed;
     }
+    #endregion
 
-    public void ChangeOutline(string form)
+    #region Color/Combat
+    public override void ColorEntity(EntityColor color)
     {
-        if (form.Equals("melee"))
+        base.ColorEntity(color);
+
+        UpdateColor();
+    }
+
+    private void UpdateColor()
+    {
+        if (entityColor == EntityColor.Red)
         {
-            renderer.material = new Material(meleeMaterial);
+            renderer.material = new Material(redMat);
         }
-        else
+        else if (entityColor == EntityColor.Blue)
         {
-            renderer.material = new Material(rangedMaterial);
+            renderer.material = new Material(blueMat);
+        }
+        else if (entityColor == EntityColor.Yellow)
+        {
+            renderer.material = new Material(yellowMat);
         }
     }
     #endregion

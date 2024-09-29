@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: melee_outline_player
+  m_Name: yellow_outline
   m_Shader: {fileID: -6465566751694194690, guid: 47417cdb1479b2d4ea71f1549f041387, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0

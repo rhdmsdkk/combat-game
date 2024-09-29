@@ -1,8 +1,16 @@
 using UnityEngine;
 
+public enum EntityColor { Red, Yellow, Blue }
+
 public class Entity : MonoBehaviour
 {
-    [SerializeField] public int health;
+    public EntityColor entityColor;
+    public int health;
+
+    public virtual void ColorEntity(EntityColor color)
+    {
+        entityColor = color;
+    }
 
     public virtual void TakeDamage(int dmg)
     {
