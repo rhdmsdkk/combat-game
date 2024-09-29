@@ -64,7 +64,11 @@ public class Player : Entity
 
     public override void TakeDamage(int dmg)
     {
-        StartCoroutine(ITakeDamage(dmg));
+        // iframes
+        if (!isDashing)
+        {
+            StartCoroutine(ITakeDamage(dmg));
+        }
     }
     #endregion
 
