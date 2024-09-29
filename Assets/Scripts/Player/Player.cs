@@ -8,6 +8,8 @@ public class Player : Entity
     public GameObject playerMesh;
     public Transform orientation;
     public Animator animator;
+    public SwitchWeapon weaponHolder;
+    public ThirdPersonCamera thirdPersonCamera;
 
     private new SkinnedMeshRenderer renderer;
 
@@ -20,7 +22,7 @@ public class Player : Entity
     public float rotationSpeed = 10f;
 
     [Header("Materials")]
-    public Material flashMaterial;
+    public Material flashMat;
     public Material redMat;
     public Material blueMat;
     public Material yellowMat;
@@ -76,9 +78,7 @@ public class Player : Entity
             StartCoroutine(ITakeDamage(dmg));
         }
     }
-    #endregion
 
-    #region Movement
     private float elapsedTime;
     public void CheckPlayerInput()
     {
@@ -127,6 +127,9 @@ public class Player : Entity
         }
     }
 
+    #endregion
+
+    #region Movement
     public void Move()
     {
         movementDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
@@ -166,14 +169,26 @@ public class Player : Entity
         if (entityColor == EntityColor.Red)
         {
             renderer.material = new Material(redMat);
+
+            weaponHolder.SelectWeapon(0);
+
+            thirdPersonCamera.style = CameraStyle.Basic;
         }
         else if (entityColor == EntityColor.Blue)
         {
             renderer.material = new Material(blueMat);
+
+            weaponHolder.SelectWeapon(1);
+
+            thirdPersonCamera.style = CameraStyle.Aim;
         }
         else if (entityColor == EntityColor.Yellow)
         {
             renderer.material = new Material(yellowMat);
+
+            weaponHolder.SelectWeapon(2);
+
+            thirdPersonCamera.style = CameraStyle.Basic;
         }
     }
     #endregion
@@ -185,7 +200,7 @@ public class Player : Entity
 
         Material mat = new(renderer.material);
 
-        renderer.material = new Material(flashMaterial);
+        renderer.material = new Material(flashMat);
 
         yield return new WaitForSeconds(0.2f);
 

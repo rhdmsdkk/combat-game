@@ -10,6 +10,7 @@ public class Goon : Entity
     private new MeshRenderer renderer;
 
     [Header("Materials")]
+    public Material whiteMat;
     public Material redMat;
     public Material blueMat;
     public Material yellowMat;
@@ -22,6 +23,8 @@ public class Goon : Entity
     private void Start()
     {
         renderer = GetComponent<MeshRenderer>();
+
+        entityColor = EntityColor.White;
     }
 
     void Update()
