@@ -14,6 +14,8 @@ public class Entity : MonoBehaviour
 
     public virtual void TakeDamage(int dmg)
     {
+        Debug.Log("ouch");
+
         health -= dmg;
 
         if (health <= 0)
@@ -24,6 +26,8 @@ public class Entity : MonoBehaviour
 
     protected virtual void Die()
     {
-        Destroy(gameObject);
+        Debug.Log("died");
+
+        Destroy(this);
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Goon : Entity
+public class Goon : Enemy
 {
     [Header("Setup")]
     public Transform firePoint;
@@ -38,6 +38,13 @@ public class Goon : Entity
             elapsedTime = 0f;
             Instantiate(projectile, firePoint.transform.position, firePoint.rotation);
         }
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+
+        Destroy(gameObject);
     }
 
     private void UpdateColor()
