@@ -8,6 +8,7 @@ public class Player : Entity
     public GameObject playerMesh;
     public Transform orientation;
     public Animator animator;
+    public SwitchWeapon weaponHolder;
 
     private new SkinnedMeshRenderer renderer;
 
@@ -121,9 +122,14 @@ public class Player : Entity
             ColorEntity(EntityColor.Yellow);
         }
 
+        // attacks
         if (Input.GetMouseButtonDown(0))
         {
-            goon.ColorEntity(entityColor);
+            PerformPrimary();
+        }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            PerformSecondary();
         }
     }
 
@@ -166,15 +172,49 @@ public class Player : Entity
         if (entityColor == EntityColor.Red)
         {
             renderer.material = new Material(redMat);
+
+            weaponHolder.SelectWeapon(0);
         }
         else if (entityColor == EntityColor.Blue)
         {
             renderer.material = new Material(blueMat);
+
+            weaponHolder.SelectWeapon(1);
         }
         else if (entityColor == EntityColor.Yellow)
         {
             renderer.material = new Material(yellowMat);
+
+            weaponHolder.SelectWeapon(2);
         }
+    }
+
+    void PerformPrimary()
+    {
+        Transform currentWeaponTransform = GetCurrentWeapon();
+        if (currentWeaponTransform != null)
+        {
+            if (currentWeaponTransform.TryGetComponent<Weapon>(out var currentWeapon)) currentWeapon.DoPrimary();
+        }
+    }
+    void PerformSecondary()
+    {
+        Transform currentWeaponTransform = GetCurrentWeapon();
+        if (currentWeaponTransform != null)
+        {
+            if (currentWeaponTransform.TryGetComponent<Weapon>(out var currentWeapon)) currentWeapon.DoSecondary();
+        }
+    }
+    Transform GetCurrentWeapon()
+    {
+        foreach (Transform weapon in weaponHolder.transform)
+        {
+            if (weapon.gameObject.activeSelf)
+            {
+                return weapon;
+            }
+        }
+        return null;
     }
     #endregion
 
