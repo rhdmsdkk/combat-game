@@ -15,7 +15,7 @@ public class ShootWeapon : Weapon
             
             if (projectile.TryGetComponent<ShootProjectile>(out var proj))
             {
-                proj.projectileColor = weaponColor;
+                proj.SetColor(weaponColor);
             }
 
             lastShootTime = Time.time;

@@ -50,6 +50,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileSpeed: 20
   projectileColor: 2
+  redMat: {fileID: 2100000, guid: f9ddd3dae570fdf44b3bb100dc73c499, type: 2}
+  blueMat: {fileID: 2100000, guid: eb22360938f33f8468637c24aacf9d62, type: 2}
+  yellowMat: {fileID: 2100000, guid: ec62cf8e7063a8f4990d673ec3ef5c42, type: 2}
 --- !u!33 &2269324425940883426
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -78,7 +81,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: af0767e2fa1524e44a09632abf21a4db, type: 2}
+  - {fileID: 2100000, guid: eb22360938f33f8468637c24aacf9d62, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
