@@ -10,6 +10,8 @@ public class Player : Entity
     public Animator animator;
     public SwitchWeapon weaponHolder;
 
+    [NonSerialized] public Ability[] abilities = new Ability[3];
+
     private new SkinnedMeshRenderer renderer;
 
     [Header("Attributes")]
@@ -46,6 +48,9 @@ public class Player : Entity
     private void Awake()
     {
         entityColor = EntityColor.Red;
+
+        abilities[0] = new HealAbility();
+        abilities[1] = new DamageAbility();
 
         rb = GetComponent<Rigidbody>();
         renderer = playerMesh.GetComponent<SkinnedMeshRenderer>();

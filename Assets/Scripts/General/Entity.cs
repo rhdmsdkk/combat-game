@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum EntityColor { Red, Yellow, Blue }
+public enum EntityColor { Red, Yellow, Blue, White }
 
 public class Entity : MonoBehaviour
 {

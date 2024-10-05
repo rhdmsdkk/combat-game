@@ -10,6 +10,7 @@ public class Goon : Enemy
     private new MeshRenderer renderer;
 
     [Header("Materials")]
+    public Material whiteMat;
     public Material redMat;
     public Material blueMat;
     public Material yellowMat;
@@ -60,6 +61,10 @@ public class Goon : Enemy
         else if (entityColor == EntityColor.Yellow)
         {
             renderer.material = new Material(yellowMat);
+        }
+        else if (entityColor == EntityColor.White)
+        {
+            renderer.material = new Material(whiteMat);
         }
     }
 
