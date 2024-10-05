@@ -5,6 +5,7 @@ public class ExplodeWeapon : Weapon
     public float explodeDuration = 0.3f;
 
     private bool isAttacking = false;
+    private Vector3 originalScale;
 
     #region Controls
     public override void DoPrimary()
@@ -27,6 +28,17 @@ public class ExplodeWeapon : Weapon
     #endregion
 
     #region Explode Weapon
+    private void Start()
+    {
+        originalScale = transform.localScale;
+    }
+
+    private void OnDisable()
+    {
+        transform.localScale = originalScale;
+        isAttacking = false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (isAttacking && other.TryGetComponent<Enemy>(out var enemy))
@@ -47,7 +59,7 @@ public class ExplodeWeapon : Weapon
     {
         isAttacking = true;
 
-        Vector3 originalScale = transform.localScale;
+        originalScale = transform.localScale;
 
         Vector3 targetScale = originalScale * 20;
 
