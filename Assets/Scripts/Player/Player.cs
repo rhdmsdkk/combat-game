@@ -21,7 +21,7 @@ public class Player : Entity
     public float rotationSpeed = 10f;
 
     [Header("Materials")]
-    public Material flashMaterial;
+    public Material flashMat;
     public Material redMat;
     public Material blueMat;
     public Material yellowMat;
@@ -77,9 +77,7 @@ public class Player : Entity
             StartCoroutine(ITakeDamage(dmg));
         }
     }
-    #endregion
 
-    #region Movement
     private float elapsedTime;
     public void CheckPlayerInput()
     {
@@ -133,6 +131,9 @@ public class Player : Entity
         }
     }
 
+    #endregion
+
+    #region Movement
     public void Move()
     {
         movementDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
@@ -234,7 +235,7 @@ public class Player : Entity
 
         Material mat = new(renderer.material);
 
-        renderer.material = new Material(flashMaterial);
+        renderer.material = new Material(flashMat);
 
         yield return new WaitForSeconds(0.2f);
 
