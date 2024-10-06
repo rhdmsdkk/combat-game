@@ -11,11 +11,11 @@ public class ShootWeapon : Weapon
     {
         if (Time.time - lastShootTime > fireRate)
         {
-            Instantiate(projectile, firePoint.transform.position, firePoint.rotation);
+            GameObject proj = Instantiate(projectile, firePoint.transform.position, firePoint.rotation);
             
-            if (projectile.TryGetComponent<ShootProjectile>(out var proj))
+            if (proj.TryGetComponent<ShootProjectile>(out var _proj))
             {
-                proj.SetColor(weaponColor);
+                _proj.SetColor(weaponColor);
             }
 
             lastShootTime = Time.time;

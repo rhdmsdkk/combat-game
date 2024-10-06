@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -7,7 +5,7 @@ public class Projectile : MonoBehaviour
     private float elapsedTime = 0f;
     public float projectileSpeed;
 
-    private Rigidbody rb;
+    protected Rigidbody rb;
     private readonly float projectileLifespan = 6f;
 
     private void Start()
@@ -16,12 +14,13 @@ public class Projectile : MonoBehaviour
 
         rb.velocity = transform.forward * projectileSpeed;
     }
+
     private void Update()
     {
         CheckAutoBreak();
     }
 
-    private void CheckAutoBreak()
+    protected void CheckAutoBreak()
     {
         elapsedTime += Time.deltaTime;
 
@@ -31,12 +30,12 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    private void Break()
+    protected void Break()
     {
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         DoImpact(other);
     }

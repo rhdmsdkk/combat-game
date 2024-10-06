@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ShootProjectile : Projectile
@@ -8,6 +9,30 @@ public class ShootProjectile : Projectile
     public Material redMat;
     public Material blueMat;
     public Material yellowMat;
+
+    private Transform aimCamera;
+
+    private void Start()
+    {
+        aimCamera = FindAnyObjectByType<Camera>().transform;
+        rb = GetComponent<Rigidbody>();
+
+        if (aimCamera != null)
+        {
+            Ray ray = new(aimCamera.position, aimCamera.forward);
+
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                Vector3 aimDir = (hit.point - transform.position).normalized;
+
+                rb.velocity = aimDir * projectileSpeed;
+            }
+            else
+            {
+                rb.velocity = aimCamera.forward * projectileSpeed;
+            }
+        }
+    }
 
     protected override void DoImpact(Collider other)
     {
