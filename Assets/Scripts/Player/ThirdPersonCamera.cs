@@ -1,5 +1,6 @@
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
     public CinemachineFreeLook basicCamera;
     public CinemachineVirtualCamera aimedCamera;
+    public Image crosshair;
 
     public float rotationSpeed;
 
@@ -34,11 +36,15 @@ public class ThirdPersonCamera : MonoBehaviour
         {
             basicCamera.Priority = 10;
             aimedCamera.Priority = 5;
+
+            crosshair.gameObject.SetActive(false);
         }
         else if (weaponType == WeaponType.Aimed)
         {
             aimedCamera.Priority = 10;
             basicCamera.Priority = 5;
+
+            crosshair.gameObject.SetActive(true);
         }
     }
 }
