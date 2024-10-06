@@ -42,6 +42,7 @@ public class Player : Entity
     [NonSerialized] public Vector3 movementDirection;
 
     [NonSerialized] public Rigidbody rb;
+    [NonSerialized] public WeaponType currentWeaponType;
 
     [NonSerialized] public readonly StateMachine<Player_Input> movementStateMachine = new();
 
@@ -53,6 +54,8 @@ public class Player : Entity
         abilities[1] = new DamageAbility();
 
         rb = GetComponent<Rigidbody>();
+        currentWeaponType = weaponHolder.transform.GetChild(weaponHolder.currentWeapon).GetComponent<Weapon>().weaponType;
+
         renderer = playerMesh.GetComponent<SkinnedMeshRenderer>();
 
         movementStateMachine.Initialize(new Player_Input(movementStateMachine, this), new Player_Idle());
@@ -148,8 +151,15 @@ public class Player : Entity
 
         if (movementDirection != Vector3.zero)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(movementDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            if (currentWeaponType == WeaponType.Aimed)
+            {
+                // aim movement
+            }
+            else
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(movementDirection);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            }
         }
     }
 
@@ -192,6 +202,8 @@ public class Player : Entity
 
             weaponHolder.SelectWeapon(2);
         }
+
+        currentWeaponType = weaponHolder.transform.GetChild(weaponHolder.currentWeapon).GetComponent<Weapon>().weaponType;
     }
 
     void PerformPrimary()

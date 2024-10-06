@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
     public Transform orientation;
     public Transform player;
-    public Transform playerObject;
     public Rigidbody rb;
+
+    public CinemachineFreeLook basicCamera;
+    public CinemachineVirtualCamera aimedCamera;
 
     public float rotationSpeed;
 
@@ -15,6 +16,8 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        SetActiveCamera(player.GetComponent<Player>().currentWeaponType);
     }
 
     private void Update()
@@ -22,13 +25,20 @@ public class ThirdPersonCamera : MonoBehaviour
         Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
         orientation.forward = viewDir.normalized;
 
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        SetActiveCamera(player.GetComponent<Player>().currentWeaponType);
+    }
 
-        if (inputDir != Vector3.zero)
+    private void SetActiveCamera(WeaponType weaponType)
+    {
+        if (weaponType == WeaponType.Basic)
         {
-            playerObject.forward = Vector3.Slerp(playerObject.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
+            basicCamera.Priority = 10;
+            aimedCamera.Priority = 5;
+        }
+        else if (weaponType == WeaponType.Aimed)
+        {
+            aimedCamera.Priority = 10;
+            basicCamera.Priority = 5;
         }
     }
 }

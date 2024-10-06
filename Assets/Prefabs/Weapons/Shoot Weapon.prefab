@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponColor: 0
+  weaponType: 1
   fireRate: 0.2
   firePoint: {fileID: 317283030451750746}
   projectile: {fileID: 6898014653081216370, guid: 2625a1020dd2ad34c9bd753f846e3d01, type: 3}

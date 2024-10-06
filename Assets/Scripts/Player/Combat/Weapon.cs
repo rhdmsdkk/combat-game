@@ -1,8 +1,11 @@
 using UnityEngine;
 
+public enum WeaponType { Basic, Aimed }
+
 public abstract class Weapon : MonoBehaviour
 {
     public EntityColor weaponColor;
+    public WeaponType weaponType;
 
     public virtual void DoPrimary()
     {
