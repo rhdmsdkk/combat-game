@@ -3,19 +3,19 @@ public class ShootWeapon : Weapon
 {
     public float fireRate = 0.2f;
     public Transform firePoint;
-    public GameObject projectile;
 
     private float lastShootTime;
+    private Transform aimCamera;
 
     public override void DoPrimary()
     {
         if (Time.time - lastShootTime > fireRate)
         {
-            GameObject proj = Instantiate(projectile, firePoint.transform.position, firePoint.rotation);
-            
-            if (proj.TryGetComponent<ShootProjectile>(out var _proj))
+            Ray ray = new(aimCamera.position, aimCamera.forward);
+
+            if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.TryGetComponent<Enemy>(out var enemy))
             {
-                _proj.SetColor(weaponColor);
+                enemy.ColorEntity(weaponColor);
             }
 
             lastShootTime = Time.time;
@@ -24,6 +24,18 @@ public class ShootWeapon : Weapon
 
     public override void DoSecondary()
     {
-        Debug.Log(weaponColor + " shoot secondary");
+        if (weaponType == WeaponType.Aimed)
+        {
+            weaponType = WeaponType.Basic;
+        }
+        else
+        {
+            weaponType = WeaponType.Aimed;
+        }
+    }
+
+    private void Start()
+    {
+        aimCamera = FindAnyObjectByType<Camera>().transform;
     }
 }

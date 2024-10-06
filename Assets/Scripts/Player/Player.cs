@@ -139,6 +139,7 @@ public class Player : Entity
         else if (Input.GetMouseButtonDown(1))
         {
             PerformSecondary();
+            CheckWeaponType();
         }
     }
 
@@ -205,6 +206,11 @@ public class Player : Entity
             weaponHolder.SelectWeapon(2);
         }
 
+        CheckWeaponType();
+    }
+
+    public void CheckWeaponType()
+    {
         currentWeaponType = weaponHolder.transform.GetChild(weaponHolder.currentWeapon).GetComponent<Weapon>().weaponType;
     }
 
