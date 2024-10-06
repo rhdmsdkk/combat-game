@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 public class ShootWeapon : Weapon
 {
@@ -56,6 +57,12 @@ public class ShootWeapon : Weapon
     private void Start()
     {
         aimCamera = FindAnyObjectByType<Camera>().transform;
+    }
+
+    private void OnDisable()
+    {
+        weaponType = WeaponType.Basic;
+        canShoot = false;
     }
 
     IEnumerator ISpawnTrail(TrailRenderer trail, Vector3 hitPoint, Vector3 hitNormal, bool madeImpact)
