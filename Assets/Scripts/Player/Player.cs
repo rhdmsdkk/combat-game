@@ -9,6 +9,7 @@ public class Player : Entity
     public Transform orientation;
     public Animator animator;
     public SwitchWeapon weaponHolder;
+    public Transform thirdPersonCamera;
 
     [NonSerialized] public Ability[] abilities = new Ability[3];
 
@@ -149,17 +150,18 @@ public class Player : Entity
 
         rb.velocity = movementDirection * movementSpeed + new Vector3(0, rb.velocity.y, 0);
 
-        if (movementDirection != Vector3.zero)
+        if (movementDirection != Vector3.zero && currentWeaponType == WeaponType.Basic)
         {
-            if (currentWeaponType == WeaponType.Aimed)
-            {
-                // aim movement
-            }
-            else
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(movementDirection);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-            }
+            Quaternion targetRotation = Quaternion.LookRotation(movementDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        }
+        else if (currentWeaponType == WeaponType.Aimed)
+        {
+            Vector3 cameraForward = Camera.main.transform.forward;
+            cameraForward.y = 0;
+
+            Quaternion targetRotation = Quaternion.LookRotation(cameraForward.normalized);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
     }
 

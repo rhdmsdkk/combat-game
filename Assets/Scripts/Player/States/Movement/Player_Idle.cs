@@ -35,6 +35,7 @@ public class Player_Idle : State<Player_Input>
 
     public override void FixedUpdate(Player_Input input)
     {
+        player.Move();
     }
 
     public override void Exit(Player_Input input)
