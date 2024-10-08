@@ -4,8 +4,7 @@ using UnityEngine.UI;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
-    public Transform basicOrientation;
-    public Transform aimedOrientation;
+    public Transform orientation;
     public Transform player;
 
     public CinemachineFreeLook basicCamera;
@@ -25,7 +24,7 @@ public class ThirdPersonCamera : MonoBehaviour
     private void Update()
     {
         Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
-        basicOrientation.forward = viewDir.normalized;
+        orientation.forward = viewDir.normalized;
 
         SetActiveCamera(player.GetComponent<Player>().currentWeaponType);
     }

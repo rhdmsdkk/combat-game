@@ -194,7 +194,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7296507}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.09147441, y: 0.8741018, z: 0.26449427, w: -0.39701536}
+  m_LocalRotation: {x: -0.091474496, y: 0.87410164, z: 0.26449418, w: -0.3970158}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -606,7 +606,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 14
+  m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &336964045
 MonoBehaviour:
@@ -1564,9 +1564,9 @@ GameObject:
   m_Component:
   - component: {fileID: 963194228}
   - component: {fileID: 963194230}
+  - component: {fileID: 963194229}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
   - component: {fileID: 963194231}
   m_Layer: 0
   m_Name: Main Camera
@@ -1642,8 +1642,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0020549856, y: 0.9132306, z: 0.004606339, w: -0.40741193}
-  m_LocalPosition: {x: -16.047304, y: 0.97, z: 30.752848}
+  m_LocalRotation: {x: 0.0020549789, y: 0.91323024, z: 0.0046063084, w: -0.40741265}
+  m_LocalPosition: {x: -16.047302, y: 0.97, z: 30.752846}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1695,8 +1695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2f1cd930176124f8928a19b5a69280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicOrientation: {fileID: 1507245558}
-  aimedOrientation: {fileID: 1627667735}
+  orientation: {fileID: 1507245558}
   player: {fileID: 2133607356}
   basicCamera: {fileID: 1945648793}
   aimedCamera: {fileID: 1519528408}
@@ -2062,7 +2061,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1507245558}
   m_Layer: 0
-  m_Name: Basic Orientation
+  m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2554,8 +2553,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 5
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 1627667735}
-  m_Follow: {fileID: 2133607356}
+  m_LookAt: {fileID: 1507245558}
+  m_Follow: {fileID: 1507245558}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 10
@@ -2569,7 +2568,7 @@ MonoBehaviour:
     m_SensorSize: {x: 1, y: 1}
   m_Transitions:
     m_BlendHint: 0
-    m_InheritPosition: 0
+    m_InheritPosition: 1
     m_OnCameraLive:
       m_PersistentCalls:
         m_Calls: []
@@ -2584,7 +2583,7 @@ Transform:
   m_GameObject: {fileID: 1519528407}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.033573, y: 1.1415691, z: 28.15}
+  m_LocalPosition: {x: -17.033573, y: 1.1615691, z: 28.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2662,7 +2661,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612840966}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.102807805, y: 0.8813187, z: 0.23935056, w: -0.39423257}
+  m_LocalRotation: {x: -0.102807954, y: 0.8813184, z: 0.23935048, w: -0.39423314}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3054,37 +3053,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 809560181}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1627667734
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1627667735}
-  m_Layer: 0
-  m_Name: Aimed Orientation
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1627667735
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1627667734}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.54, y: 1.112, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2133607356}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1662960477
 GameObject:
   m_ObjectHideFlags: 3
@@ -3156,7 +3124,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1662960477}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.1141314, y: 0.8878531, z: 0.21384129, w: -0.3911046}
+  m_LocalRotation: {x: 0.11413153, y: -0.8878529, z: -0.21384126, w: 0.39110506}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3486,7 +3454,7 @@ MonoBehaviour:
     m_SensorSize: {x: 1, y: 1}
   m_Transitions:
     m_BlendHint: 0
-    m_InheritPosition: 0
+    m_InheritPosition: 1
     m_OnCameraLive:
       m_PersistentCalls:
         m_Calls: []
@@ -3566,7 +3534,7 @@ Transform:
   m_GameObject: {fileID: 1945648792}
   serializedVersion: 2
   m_LocalRotation: {x: -0.25721785, y: -0, z: -0, w: 0.9663534}
-  m_LocalPosition: {x: -16.047304, y: 0.97, z: 30.752848}
+  m_LocalPosition: {x: -16.047302, y: 0.97, z: 30.752846}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4051,7 +4019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c9beda531928fc40968802117a5d256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RecenterTarget: 2
+  m_RecenterTarget: 1
   m_VerticalAxis:
     Value: 0
     m_SpeedMode: 0
@@ -4113,7 +4081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0, y: 1.04, z: 0}
+  m_TrackedObjectOffset: {x: 0, y: 0.25, z: 0}
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
@@ -4178,7 +4146,6 @@ Transform:
   m_Children:
   - {fileID: 1706509412}
   - {fileID: 1507245558}
-  - {fileID: 1627667735}
   - {fileID: 1381885176}
   - {fileID: 336964043}
   m_Father: {fileID: 0}

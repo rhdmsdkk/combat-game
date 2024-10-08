@@ -86,9 +86,7 @@ public class Player : Entity
             StartCoroutine(ITakeDamage(dmg));
         }
     }
-    #endregion
 
-    #region Movement
     private float elapsedTime;
     public void CheckPlayerInput()
     {
@@ -142,7 +140,9 @@ public class Player : Entity
             CheckWeaponType();
         }
     }
+    #endregion
 
+    #region Movement
     public void Move()
     {
         movementDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
@@ -158,11 +158,10 @@ public class Player : Entity
         }
         else if (currentWeaponType == WeaponType.Aimed)
         {
-            Vector3 cameraForward = Camera.main.transform.forward;
-            cameraForward.y = 0;
+            Vector3 cameraForward = new(Camera.main.transform.forward.x, 0f, Camera.main.transform.forward.z);
 
             Quaternion targetRotation = Quaternion.LookRotation(cameraForward.normalized);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            transform.rotation = targetRotation;
         }
     }
 
