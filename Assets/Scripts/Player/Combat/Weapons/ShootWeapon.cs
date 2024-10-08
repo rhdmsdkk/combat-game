@@ -23,16 +23,11 @@ public class ShootWeapon : Weapon
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                StartCoroutine(ISpawnTrail(trail, hit.point, hit.normal, true));
-
-                if (hit.collider.TryGetComponent<Enemy>(out var enemy))
-                {
-                    enemy.ColorEntity(weaponColor);
-                }
+                StartCoroutine(ISpawnTrail(trail, hit, hit.point, hit.normal, true));
             }
             else
             {
-                StartCoroutine(ISpawnTrail(trail, firePoint.position + aimCamera.forward * 100, Vector3.zero, false));
+                StartCoroutine(ISpawnTrail(trail, hit, firePoint.position + aimCamera.forward * 100, Vector3.zero, false));
             }
 
             lastShootTime = Time.time;
@@ -58,13 +53,25 @@ public class ShootWeapon : Weapon
         aimCamera = FindAnyObjectByType<Camera>().transform;
     }
 
+    private void Update()
+    {
+        if (canShoot)
+        {
+            Vector3 cameraRotation = aimCamera.rotation.eulerAngles;
+
+            Vector3 newRotation = new(cameraRotation.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+
+            transform.rotation = Quaternion.Euler(newRotation);
+        }
+    }
+
     private void OnDisable()
     {
         weaponType = WeaponType.Basic;
         canShoot = false;
     }
 
-    IEnumerator ISpawnTrail(TrailRenderer trail, Vector3 hitPoint, Vector3 hitNormal, bool madeImpact)
+    IEnumerator ISpawnTrail(TrailRenderer trail, RaycastHit hit, Vector3 hitPoint, Vector3 hitNormal, bool madeImpact)
     {
         Vector3 startPosition = trail.transform.position;
         float distance = Vector3.Distance(trail.transform.position, hitPoint);
@@ -84,6 +91,12 @@ public class ShootWeapon : Weapon
         if (madeImpact)
         {
             Instantiate(impactParticleSystem, hitPoint, Quaternion.LookRotation(hitNormal));
+
+            if (hit.collider.TryGetComponent<Enemy>(out var enemy))
+            {
+                enemy.ColorEntity(weaponColor);
+                // enemy.TakeDamage(1);
+            }
         }
 
         Destroy(trail.gameObject, trail.time);
