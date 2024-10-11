@@ -6,6 +6,7 @@ public class Goon : Enemy
     public Transform firePoint;
     public Transform player;
     public GameObject projectile;
+    [SerializeField] private HealthBar healthBar;
 
     private new MeshRenderer renderer;
 
@@ -23,6 +24,8 @@ public class Goon : Enemy
     private void Start()
     {
         renderer = GetComponent<MeshRenderer>();
+
+        healthBar.SetHealth(health);
     }
 
     void Update()
@@ -46,6 +49,13 @@ public class Goon : Enemy
         base.Die();
 
         Destroy(gameObject);
+    }
+
+    public override void TakeDamage(int dmg)
+    {
+        base.TakeDamage(dmg);
+
+        healthBar.SetHealth(health);
     }
 
     private void UpdateColor()

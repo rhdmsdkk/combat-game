@@ -95,7 +95,7 @@ public class ShootWeapon : Weapon
             if (hit.collider.TryGetComponent<Enemy>(out var enemy))
             {
                 enemy.ColorEntity(weaponColor);
-                // enemy.TakeDamage(1);
+                enemy.TakeDamage(1);
             }
         }
 

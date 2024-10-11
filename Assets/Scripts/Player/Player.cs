@@ -10,6 +10,7 @@ public class Player : Entity
     public Animator animator;
     public SwitchWeapon weaponHolder;
     public Transform thirdPersonCamera;
+    public HealthBar healthBar;
 
     [NonSerialized] public Ability[] abilities = new Ability[3];
 
@@ -60,6 +61,8 @@ public class Player : Entity
         renderer = playerMesh.GetComponent<SkinnedMeshRenderer>();
 
         movementStateMachine.Initialize(new Player_Input(movementStateMachine, this), new Player_Idle());
+
+        healthBar.SetHealth(health);
     }
 
     private void Update()
@@ -246,14 +249,24 @@ public class Player : Entity
     private IEnumerator ITakeDamage(int dmg)
     {
         base.TakeDamage(dmg);
-
-        Material mat = new(renderer.material);
+        healthBar.SetHealth(health);
 
         renderer.material = new Material(flashMaterial);
 
         yield return new WaitForSeconds(0.2f);
 
-        renderer.material = mat;
+        if (entityColor == EntityColor.Red)
+        {
+            renderer.material = redMat;
+        }
+        else if (entityColor == EntityColor.Blue)
+        {
+            renderer.material = blueMat;
+        }
+        else
+        {
+            renderer.material = yellowMat;
+        }
     }
 
     private IEnumerator IDie()
