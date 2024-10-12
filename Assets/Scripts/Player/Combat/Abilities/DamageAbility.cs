@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class DamageAbility : Ability
 {
-    public override void DoAbility(Entity entity)
+    public override void DoAbility(Player player, Entity target)
     {
-        Instantiate(GetComponent<Player>().abilityData.explodeParticleSystem, entity.transform.position, Quaternion.identity);
-        entity.Stagger(2f);
-        entity.TakeDamage(5);
+        Instantiate(player.abilityData.explodeParticleSystem, target.transform.position, Quaternion.identity);
+        target.Stagger(player.abilityData.explodeStaggerAmount);
+        target.TakeDamage(player.abilityData.explodeDamage);
     }
 }

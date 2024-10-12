@@ -1,9 +1,7 @@
-using UnityEngine;
-
 public class HealAbility : Ability
 {
-    public override void DoAbility(Entity entity)
+    public override void DoAbility(Player player, Entity target)
     {
-        Debug.Log("healed");
+        player.Heal(player.abilityData.healAmount);
     }
 }

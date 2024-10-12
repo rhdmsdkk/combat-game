@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16cc4d57968ce5044898c1ce6504ed13, type: 3}
   m_Name: AbilityData
   m_EditorClassIdentifier: 
+  maxHealth: 10
+  explodeStaggerAmount: 2
+  explodeDamage: 6
   explodeParticleSystem: {fileID: 5878820114250753064, guid: 77dbc9d4349947c44992880a92088f83, type: 3}
+  healAmount: 2
   healParticleSystem: {fileID: 5878820114250753064, guid: b76893485fc06f048baf22c2023f5e13, type: 3}

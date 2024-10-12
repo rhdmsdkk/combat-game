@@ -24,17 +24,17 @@ public class AbilityManager : MonoBehaviour
 
             for (int i = 0; i < entitiesRed.Count; i++)
             {
-                player.abilities[0]?.DoAbility(entitiesRed[i]);
+                player.abilities[0]?.DoAbility(player, entitiesRed[i]);
             }
 
             for (int i = 0; i < entitiesBlue.Count; i++)
             {
-                player.abilities[1]?.DoAbility(entitiesBlue[i]);
+                player.abilities[1]?.DoAbility(player,entitiesBlue[i]);
             }
 
             for (int i = 0; i < entitiesYellow.Count; i++)
             {
-                player.abilities[2]?.DoAbility(entitiesYellow[i]);
+                player.abilities[2]?.DoAbility(player, entitiesYellow[i]);
             }
 
             ResetConsumedColors();

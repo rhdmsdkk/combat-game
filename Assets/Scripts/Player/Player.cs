@@ -54,6 +54,7 @@ public class Player : Entity
 
         movementStateMachine.Initialize(new Player_Input(movementStateMachine, this), new Player_Idle());
 
+        abilityData.maxHealth = health;
         healthBar.SetHealth(health);
     }
 
@@ -80,6 +81,18 @@ public class Player : Entity
         {
             StartCoroutine(ITakeDamage(dmg));
         }
+    }
+
+    public override void Heal(int hp)
+    {
+        if (health + hp > abilityData.maxHealth)
+        {
+            health = abilityData.maxHealth;
+            healthBar.SetHealth(health);
+            return;
+        }
+        base.Heal(hp);
+        healthBar.SetHealth(health);
     }
 
     private float elapsedTime;

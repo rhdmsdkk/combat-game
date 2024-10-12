@@ -24,6 +24,11 @@ public class Entity : MonoBehaviour
         }
     }
 
+    public virtual void Heal(int hp)
+    {
+        health += hp;
+    }
+
     protected virtual void Die()
     {
         Destroy(this);
@@ -35,7 +40,6 @@ public class Entity : MonoBehaviour
         {
             Vector3 forceDirection = Random.insideUnitSphere * staggerAmount;
             forceDirection.y = staggerAmount * (3f / 2f);
-            Debug.Log("Force applied: " + forceDirection);
             rb.AddForce(forceDirection, ForceMode.Impulse);
         }
     }
