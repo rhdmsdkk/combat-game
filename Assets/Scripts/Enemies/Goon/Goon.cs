@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Goon : Enemy
@@ -9,7 +10,6 @@ public class Goon : Enemy
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private ParticleSystem deathParticleSystem;
 
-    [NonSerialized] public CharacterController controller;
     private new MeshRenderer renderer;
 
     [Header("Attributes")]
@@ -25,8 +25,6 @@ public class Goon : Enemy
 
     private void Start()
     {
-        controller = GetComponent<CharacterController>();
-        controller.enabled = false;
         renderer = GetComponent<MeshRenderer>();
 
         healthBar.SetHealth(health);
@@ -39,6 +37,11 @@ public class Goon : Enemy
     void Update()
     {
         stateMachine.Update();
+    }
+
+    private void FixedUpdate()
+    {
+        stateMachine.FixedUpdate();
     }
 
     public void TrackPlayer()
@@ -110,5 +113,30 @@ public class Goon : Enemy
         base.ColorEntity(color);
 
         UpdateColor();
+    }
+
+    public override void Stagger(float staggerAmount)
+    {
+        base.Stagger(staggerAmount);
+
+        stateMachine.SetState(new Goon_Staggered());
+    }
+
+    [NonSerialized] public bool isStaggered = false;
+
+    public void Wait()
+    {
+        StartCoroutine(IWait());
+    }
+
+    IEnumerator IWait()
+    {
+        isStaggered = true;
+
+        yield return new WaitForSeconds(0.5f);
+
+        isStaggered = false;
+
+        stateMachine.SetState(new Goon_Attacking());
     }
 }

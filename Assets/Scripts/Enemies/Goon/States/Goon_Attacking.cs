@@ -5,7 +5,6 @@ public class Goon_Attacking : State<Goon_Input>
     public override void Enter(Goon_Input input)
     {
         Debug.Log("attacking");
-        input.goon.controller.enabled = false;
     }
 
     public override void Update(Goon_Input input)

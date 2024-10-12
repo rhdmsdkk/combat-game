@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class Billboard : MonoBehaviour
 {
-    [SerializeField] private Transform cam;
+    private Transform cam;
+
+    private void Awake()
+    {
+        cam = FindAnyObjectByType<Camera>().transform;
+    }
 
     private void LateUpdate()
     {
