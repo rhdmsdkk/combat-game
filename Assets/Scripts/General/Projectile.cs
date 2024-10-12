@@ -37,6 +37,11 @@ public class Projectile : MonoBehaviour
 
     protected void OnTriggerEnter(Collider other)
     {
+        if (other.isTrigger)
+        {
+            return;
+        }
+
         DoImpact(other);
     }
 

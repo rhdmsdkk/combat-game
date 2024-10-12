@@ -1,47 +1,71 @@
+using System;
 using UnityEngine;
 
 public class Goon : Enemy
 {
     [Header("Setup")]
-    public Transform firePoint;
-    public Transform player;
-    public GameObject projectile;
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private Transform player;
+    [SerializeField] private GameObject projectile;
     [SerializeField] private HealthBar healthBar;
 
     private new MeshRenderer renderer;
 
     [Header("Materials")]
-    public Material whiteMat;
-    public Material redMat;
-    public Material blueMat;
-    public Material yellowMat;
+    [SerializeField] private Material whiteMat;
+    [SerializeField] private Material redMat;
+    [SerializeField] private Material blueMat;
+    [SerializeField] private Material yellowMat;
 
     [Header("Attributes")]
-    public float shootTime;
+    public float moveSpeed;
+    [SerializeField] private float shootTime;
 
     private float elapsedTime = 0f;
+    private float nextShootTime;
 
     private void Start()
     {
         renderer = GetComponent<MeshRenderer>();
 
         healthBar.SetHealth(health);
+
+        nextShootTime = shootTime;
     }
 
     void Update()
     {
+        TrackPlayer();
+
         Shoot();
+    }
+
+    private void TrackPlayer()
+    {
+        // look
+        Vector3 directionToPlayer = player.position - transform.position;
+
+        directionToPlayer.y = 0f;
+
+        transform.forward = directionToPlayer.normalized;
+
+        // aim
+        Vector3 aimDirectionToPlayer = player.position + new Vector3(0f, 1f, 0f) - firePoint.position;
+
+        firePoint.rotation = Quaternion.LookRotation(aimDirectionToPlayer);
     }
 
     private void Shoot()
     {
         elapsedTime += Time.deltaTime;
 
-        if (elapsedTime >= shootTime)
+        if (elapsedTime >= nextShootTime)
         {
             elapsedTime = 0f;
             Instantiate(projectile, firePoint.transform.position, firePoint.rotation);
         }
+
+        nextShootTime = shootTime + UnityEngine.Random.Range(-shootTime * (1f / 3f), shootTime * (1f / 3f));
     }
 
     protected override void Die()

@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponColor: 0
+  weaponType: 0
   explodeDuration: 0.3
 --- !u!33 &6509054939716288363
 MeshFilter:
