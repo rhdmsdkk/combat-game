@@ -66,7 +66,7 @@ public class Goon : Enemy
     {
         base.Die();
 
-        Instantiate(deathParticleSystem, firePoint.position, firePoint.rotation);
+        Instantiate(deathParticleSystem, firePoint.position + new Vector3(0f, 0.25f, 0f), firePoint.rotation);
 
         Destroy(gameObject);
     }
