@@ -1,55 +1,62 @@
+using System;
 using UnityEngine;
 
 public class Goon : Enemy
 {
     [Header("Setup")]
     [SerializeField] private Transform firePoint;
-    [SerializeField] private Transform player;
     [SerializeField] private GameObject projectile;
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private ParticleSystem deathParticleSystem;
 
+    [NonSerialized] public CharacterController controller;
     private new MeshRenderer renderer;
 
     [Header("Attributes")]
     public float moveSpeed;
+    public float retreatSpeed = 2f;
+    public float chaseSpeed = 4f;
     [SerializeField] private float shootTime;
+
+    [NonSerialized] public readonly StateMachine<Goon_Input> stateMachine = new();
 
     private float elapsedTime = 0f;
     private float nextShootTime;
 
     private void Start()
     {
+        controller = GetComponent<CharacterController>();
+        controller.enabled = false;
         renderer = GetComponent<MeshRenderer>();
 
         healthBar.SetHealth(health);
+
+        stateMachine.Initialize(new Goon_Input(stateMachine, this, FindAnyObjectByType<Player>()), new Goon_Attacking());
 
         nextShootTime = shootTime;
     }
 
     void Update()
     {
-        TrackPlayer();
-
-        Shoot();
+        stateMachine.Update();
     }
 
-    private void TrackPlayer()
+    public void TrackPlayer()
     {
         // look
-        Vector3 directionToPlayer = player.position - transform.position;
+        Vector3 directionToPlayer = stateMachine.Input.player.transform.position - transform.position;
 
         directionToPlayer.y = 0f;
 
         transform.forward = directionToPlayer.normalized;
 
         // aim
-        Vector3 aimDirectionToPlayer = player.position + new Vector3(0f, 1f, 0f) - firePoint.position;
+        Vector3 aimDirectionToPlayer = stateMachine.Input.player.transform.position + new Vector3(0f, 1f, 0f) - firePoint.position;
 
         firePoint.rotation = Quaternion.LookRotation(aimDirectionToPlayer);
     }
 
-    private void Shoot()
+    public void Shoot()
     {
         elapsedTime += Time.deltaTime;
 
@@ -59,7 +66,7 @@ public class Goon : Enemy
             Instantiate(projectile, firePoint.transform.position, firePoint.rotation);
         }
 
-        nextShootTime = shootTime + Random.Range(-shootTime * (1f / 3f), shootTime * (1f / 3f));
+        nextShootTime = shootTime + UnityEngine.Random.Range(-shootTime * (1f / 3f), shootTime * (1f / 3f));
     }
 
     protected override void Die()
