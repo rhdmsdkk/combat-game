@@ -7,6 +7,7 @@ public class Goon : Enemy
     [SerializeField] private Transform player;
     [SerializeField] private GameObject projectile;
     [SerializeField] private HealthBar healthBar;
+    [SerializeField] private ParticleSystem deathParticleSystem;
 
     private new MeshRenderer renderer;
 
@@ -58,12 +59,14 @@ public class Goon : Enemy
             Instantiate(projectile, firePoint.transform.position, firePoint.rotation);
         }
 
-        nextShootTime = shootTime + UnityEngine.Random.Range(-shootTime * (1f / 3f), shootTime * (1f / 3f));
+        nextShootTime = shootTime + Random.Range(-shootTime * (1f / 3f), shootTime * (1f / 3f));
     }
 
     protected override void Die()
     {
         base.Die();
+
+        Instantiate(deathParticleSystem, firePoint.position, firePoint.rotation);
 
         Destroy(gameObject);
     }

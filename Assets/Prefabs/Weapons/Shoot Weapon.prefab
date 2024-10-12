@@ -53,7 +53,7 @@ MonoBehaviour:
   firePoint: {fileID: 317283030451750746}
   bulletTrail: {fileID: 2782988069862420129, guid: 5d46bebb3e3ad0143b4c1d4c74542fb0, type: 3}
   impactParticleSystem: {fileID: 5878820114250753064, guid: b76893485fc06f048baf22c2023f5e13, type: 3}
-  bulletSpeed: 100
+  bulletSpeed: 250
 --- !u!33 &5037701866725613479
 MeshFilter:
   m_ObjectHideFlags: 0

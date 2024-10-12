@@ -28,4 +28,15 @@ public class Entity : MonoBehaviour
     {
         Destroy(this);
     }
+
+    public virtual void Stagger(float staggerAmount)
+    {
+        if (gameObject.TryGetComponent<Rigidbody>(out var rb))
+        {
+            Vector3 forceDirection = Random.insideUnitSphere * staggerAmount;
+            forceDirection.y = staggerAmount * (3f / 2f);
+            Debug.Log("Force applied: " + forceDirection);
+            rb.AddForce(forceDirection, ForceMode.Impulse);
+        }
+    }
 }

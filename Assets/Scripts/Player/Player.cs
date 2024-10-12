@@ -11,6 +11,7 @@ public class Player : Entity
     public SwitchWeapon weaponHolder;
     public Transform thirdPersonCamera;
     public HealthBar healthBar;
+    public AbilityData abilityData;
 
     [NonSerialized] public Ability[] abilities = new Ability[3];
 
@@ -23,9 +24,6 @@ public class Player : Entity
     public float dashDuration = 1.5f;
     public float dashCooldown = 2f;
     public float rotationSpeed = 10f;
-
-    [Header("Enemy")]
-    public Goon goon;
 
     // inputs
     [NonSerialized] public float horizontalInput = 0;
