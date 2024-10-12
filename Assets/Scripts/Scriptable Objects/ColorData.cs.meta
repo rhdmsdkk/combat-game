@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8212cda5086f4ef469739353b3d754d5
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - flashMaterial: {fileID: 2100000, guid: 7e55f2bf2ad371e488250982bb08639e, type: 2}
+  - whiteMat: {fileID: 2100000, guid: af0767e2fa1524e44a09632abf21a4db, type: 2}
+  - redMat: {fileID: 2100000, guid: f9ddd3dae570fdf44b3bb100dc73c499, type: 2}
+  - blueMat: {fileID: 2100000, guid: eb22360938f33f8468637c24aacf9d62, type: 2}
+  - yellowMat: {fileID: 2100000, guid: ec62cf8e7063a8f4990d673ec3ef5c42, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

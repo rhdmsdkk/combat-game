@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class Player_Walk : State<Player_Input>
 {
     private Player player;

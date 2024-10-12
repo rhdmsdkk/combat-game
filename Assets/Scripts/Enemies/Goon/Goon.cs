@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Goon : Enemy
@@ -10,12 +9,6 @@ public class Goon : Enemy
     [SerializeField] private HealthBar healthBar;
 
     private new MeshRenderer renderer;
-
-    [Header("Materials")]
-    [SerializeField] private Material whiteMat;
-    [SerializeField] private Material redMat;
-    [SerializeField] private Material blueMat;
-    [SerializeField] private Material yellowMat;
 
     [Header("Attributes")]
     public float moveSpeed;
@@ -86,19 +79,19 @@ public class Goon : Enemy
     {
         if (entityColor == EntityColor.Red)
         {
-            renderer.material = new Material(redMat);
+            renderer.material = new Material(colorData.redMat);
         }
         else if (entityColor == EntityColor.Blue)
         {
-            renderer.material = new Material(blueMat);
+            renderer.material = new Material(colorData.blueMat);
         }
         else if (entityColor == EntityColor.Yellow)
         {
-            renderer.material = new Material(yellowMat);
+            renderer.material = new Material(colorData.yellowMat);
         }
         else if (entityColor == EntityColor.White)
         {
-            renderer.material = new Material(whiteMat);
+            renderer.material = new Material(colorData.whiteMat);
         }
     }
 

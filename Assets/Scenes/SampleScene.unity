@@ -194,7 +194,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7296507}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.09147455, y: 0.8741016, z: 0.26449415, w: -0.397016}
+  m_LocalRotation: {x: -0.091474496, y: 0.87410164, z: 0.26449418, w: -0.3970158}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -621,8 +621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae914dbe2c63bb4caa8e4a34ff75fc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityRadius: 14
-  player: {fileID: 2133607360}
+  abilityRadius: 20
 --- !u!43 &384752880
 Mesh:
   m_ObjectHideFlags: 0
@@ -1646,14 +1645,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityColor: 0
   health: 50
+  colorData: {fileID: 11400000, guid: 610bfec5e60406f43b5a29ed2ac9af11, type: 2}
   firePoint: {fileID: 1615165044}
   player: {fileID: 2133607356}
   projectile: {fileID: 1814264347514482617, guid: d52ae1e253b1aaf43a6380a6e2f8bf40, type: 3}
   healthBar: {fileID: 1891007236}
-  whiteMat: {fileID: 2100000, guid: af0767e2fa1524e44a09632abf21a4db, type: 2}
-  redMat: {fileID: 2100000, guid: f9ddd3dae570fdf44b3bb100dc73c499, type: 2}
-  blueMat: {fileID: 2100000, guid: eb22360938f33f8468637c24aacf9d62, type: 2}
-  yellowMat: {fileID: 2100000, guid: ec62cf8e7063a8f4990d673ec3ef5c42, type: 2}
   moveSpeed: 0.1
   shootTime: 3
 --- !u!1 &809560180
@@ -3002,7 +2998,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612840966}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.102807954, y: 0.8813184, z: 0.23935048, w: -0.39423317}
+  m_LocalRotation: {x: -0.102807954, y: 0.8813184, z: 0.23935048, w: -0.39423314}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3465,8 +3461,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1662960477}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15320359, y: -0.9049609, z: -0.12270541, w: 0.37751547}
-  m_LocalPosition: {x: -0.17423439, y: 0.40566167, z: 0.052154288}
+  m_LocalRotation: {x: -0.11413154, y: 0.88785285, z: 0.21384126, w: -0.3911051}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4571,6 +4567,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityColor: 0
   health: 10
+  colorData: {fileID: 11400000, guid: 610bfec5e60406f43b5a29ed2ac9af11, type: 2}
   playerMesh: {fileID: 1108825893}
   orientation: {fileID: 963194228}
   animator: {fileID: 1706509413}
@@ -4583,10 +4580,6 @@ MonoBehaviour:
   dashDuration: 0.3
   dashCooldown: 1
   rotationSpeed: 10
-  flashMaterial: {fileID: 2100000, guid: 7e55f2bf2ad371e488250982bb08639e, type: 2}
-  redMat: {fileID: 2100000, guid: f9ddd3dae570fdf44b3bb100dc73c499, type: 2}
-  blueMat: {fileID: 2100000, guid: eb22360938f33f8468637c24aacf9d62, type: 2}
-  yellowMat: {fileID: 2100000, guid: ec62cf8e7063a8f4990d673ec3ef5c42, type: 2}
   goon: {fileID: 772126612}
 --- !u!1001 &2052644638630266446
 PrefabInstance:

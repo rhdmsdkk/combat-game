@@ -24,12 +24,6 @@ public class Player : Entity
     public float dashCooldown = 2f;
     public float rotationSpeed = 10f;
 
-    [Header("Materials")]
-    public Material flashMaterial;
-    public Material redMat;
-    public Material blueMat;
-    public Material yellowMat;
-
     [Header("Enemy")]
     public Goon goon;
 
@@ -52,8 +46,8 @@ public class Player : Entity
     {
         entityColor = EntityColor.Red;
 
-        abilities[0] = new HealAbility();
-        abilities[1] = new DamageAbility();
+        abilities[0] = gameObject.AddComponent<HealAbility>();
+        abilities[1] = gameObject.AddComponent<DamageAbility>();
 
         rb = GetComponent<Rigidbody>();
         currentWeaponType = weaponHolder.transform.GetChild(weaponHolder.currentWeapon).GetComponent<Weapon>().weaponType;
@@ -191,19 +185,19 @@ public class Player : Entity
     {
         if (entityColor == EntityColor.Red)
         {
-            renderer.material = new Material(redMat);
+            renderer.material = new Material(colorData.redMat);
 
             weaponHolder.SelectWeapon(0);
         }
         else if (entityColor == EntityColor.Blue)
         {
-            renderer.material = new Material(blueMat);
+            renderer.material = new Material(colorData.blueMat);
 
             weaponHolder.SelectWeapon(1);
         }
         else if (entityColor == EntityColor.Yellow)
         {
-            renderer.material = new Material(yellowMat);
+            renderer.material = new Material(colorData.yellowMat);
 
             weaponHolder.SelectWeapon(2);
         }
@@ -251,21 +245,21 @@ public class Player : Entity
         base.TakeDamage(dmg);
         healthBar.SetHealth(health);
 
-        renderer.material = new Material(flashMaterial);
+        renderer.material = new Material(colorData.flashMaterial);
 
         yield return new WaitForSeconds(0.2f);
 
         if (entityColor == EntityColor.Red)
         {
-            renderer.material = redMat;
+            renderer.material = colorData.redMat;
         }
         else if (entityColor == EntityColor.Blue)
         {
-            renderer.material = blueMat;
+            renderer.material = colorData.blueMat;
         }
         else
         {
-            renderer.material = yellowMat;
+            renderer.material = colorData.yellowMat;
         }
     }
 

@@ -1,18 +1,19 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilityRadius : MonoBehaviour
+public class AbilityManager : MonoBehaviour
 {
-    public float abilityRadius = 5f;
-    public Player player;
+    [SerializeField] private float abilityRadius = 5f;
+    
+    private Player player;
 
-    private int[] entityColors = new int[3]; // [red, blue, yellow]
+    private readonly List<Entity> entitiesRed = new();
+    private readonly List<Entity> entitiesBlue = new();
+    private readonly List<Entity> entitiesYellow = new();
 
     private void Awake()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            entityColors[i] = 0;
-        }
+        player = GetComponentInParent<Player>();
     }
 
     private void Update()
@@ -21,19 +22,19 @@ public class AbilityRadius : MonoBehaviour
         {
             DetectEnemies();
 
-            for (int i = 0; i < entityColors[0]; i++)
+            for (int i = 0; i < entitiesRed.Count; i++)
             {
-                player.abilities[0]?.DoAbility();
+                player.abilities[0]?.DoAbility(entitiesRed[i]);
             }
 
-            for (int i = 0; i < entityColors[1]; i++)
+            for (int i = 0; i < entitiesBlue.Count; i++)
             {
-                player.abilities[1]?.DoAbility();
+                player.abilities[1]?.DoAbility(entitiesBlue[i]);
             }
 
-            for (int i = 0; i < entityColors[2]; i++)
+            for (int i = 0; i < entitiesYellow.Count; i++)
             {
-                player.abilities[2]?.DoAbility();
+                player.abilities[2]?.DoAbility(entitiesYellow[i]);
             }
 
             ResetConsumedColors();
@@ -57,25 +58,29 @@ public class AbilityRadius : MonoBehaviour
 
     private void UpdateConsumedColors(Enemy enemy)
     {
+        if (enemy.entityColor == EntityColor.White)
+        {
+            return;
+        }
+
         if (enemy.entityColor == EntityColor.Red)
         {
-            entityColors[0]++;
+            entitiesRed.Add(enemy);
         } 
         else if (enemy.entityColor == EntityColor.Blue)
         {
-            entityColors[1]++;
+            entitiesBlue.Add(enemy);
         }
         else if (enemy.entityColor == EntityColor.Yellow)
         {
-            entityColors[2]++;
+            entitiesYellow.Add(enemy);
         }
     }
 
     private void ResetConsumedColors()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            entityColors[i] = 0;
-        }
+        entitiesRed.Clear();
+        entitiesBlue.Clear();
+        entitiesYellow.Clear();
     }
 }

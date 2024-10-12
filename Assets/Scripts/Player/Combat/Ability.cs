@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class Ability
+public class Ability : MonoBehaviour
 {
-    public virtual void DoAbility()
+    public virtual void DoAbility(Entity entity)
     {
         Debug.Log("did ability");
     }

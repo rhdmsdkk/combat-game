@@ -7,6 +7,8 @@ public class Entity : MonoBehaviour
     public EntityColor entityColor;
     public int health;
 
+    public ColorData colorData;
+
     public virtual void ColorEntity(EntityColor color)
     {
         entityColor = color;
@@ -14,8 +16,6 @@ public class Entity : MonoBehaviour
 
     public virtual void TakeDamage(int dmg)
     {
-        Debug.Log("ouch");
-
         health -= dmg;
 
         if (health <= 0)
@@ -26,8 +26,6 @@ public class Entity : MonoBehaviour
 
     protected virtual void Die()
     {
-        Debug.Log("died");
-
         Destroy(this);
     }
 }
