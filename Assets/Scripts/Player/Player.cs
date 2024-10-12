@@ -273,8 +273,7 @@ public class Player : Entity
     {
         yield return new WaitForSeconds(0.25f);
 
-        playerMesh.GetComponent<Renderer>().enabled = false;
-        Destroy(this);
+        movementStateMachine.SetState(new Player_Dead());
     }
     #endregion
 }

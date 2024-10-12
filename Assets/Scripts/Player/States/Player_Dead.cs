@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Dead : MonoBehaviour
+public class Player_Dead : State<Player_Input>
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Enter(Player_Input input)
     {
-        
+        input.player.gameObject.SetActive(false);
+        input.player.enabled = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public override void Update(Player_Input input) { }
+
+    public override void Exit(Player_Input input) { }
+
+    public override void FixedUpdate(Player_Input input) { }
 }

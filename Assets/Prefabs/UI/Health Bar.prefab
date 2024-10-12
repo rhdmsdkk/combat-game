@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c01de97e086624498ee2058f13916c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayerHealthbar: 0
   maxHealth: 10
   slider: {fileID: 5411678905965308744}
 --- !u!114 &5411678905965308744
