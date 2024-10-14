@@ -1,34 +1,36 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Goon_Chasing : State<Goon_Input>
 {
-    private Rigidbody rb;
+    private NavMeshAgent navMeshAgent;
 
     public override void Enter(Goon_Input input)
     {
         Debug.Log("chasing");
 
-        rb = input.goon.GetComponent<Rigidbody>();
+        navMeshAgent = input.goon.GetComponent<NavMeshAgent>();
     }
 
     public override void Update(Goon_Input input)
     {
         input.goon.TrackPlayer();
-    }
 
-    public override void FixedUpdate(Goon_Input input)
-    {
-        rb.velocity = ChaseDirection(input);
+        navMeshAgent.SetDestination(ChaseDirection(input));
     }
 
     private Vector3 ChaseDirection(Goon_Input input)
     {
-        Vector3 chaseDirection = input.goon.chaseSpeed * (input.player.transform.position - input.goon.transform.position).normalized;
+        Vector3 chaseDirection = input.player.transform.position - input.goon.transform.position;
 
-        chaseDirection.y = 0f;
+        Vector3 chaseTarget = input.goon.transform.position + chaseDirection.normalized * input.goon.chaseSpeed;
 
-        return chaseDirection;
+        chaseTarget.y = input.goon.transform.position.y;
+
+        return chaseTarget;
     }
+
+    public override void FixedUpdate(Goon_Input input) { }
 
     public override void Exit(Goon_Input input) { }
 }

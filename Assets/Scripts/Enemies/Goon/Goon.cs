@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Windows;
 
 public class Goon : Enemy
 {
@@ -11,6 +13,7 @@ public class Goon : Enemy
     [SerializeField] private ParticleSystem deathParticleSystem;
 
     private new MeshRenderer renderer;
+    private NavMeshAgent navMeshAgent;
 
     [Header("Attributes")]
     public float moveSpeed;
@@ -26,6 +29,7 @@ public class Goon : Enemy
     private void Start()
     {
         renderer = GetComponent<MeshRenderer>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
 
         healthBar.SetHealth(health);
 
@@ -115,11 +119,12 @@ public class Goon : Enemy
         UpdateColor();
     }
 
+    // switching states disables the navMeshAgent so the rb can stagger
     public override void Stagger(float staggerAmount)
     {
-        base.Stagger(staggerAmount);
-
         stateMachine.SetState(new Goon_Staggered());
+
+        base.Stagger(staggerAmount);
     }
 
     [NonSerialized] public bool isStaggered = false;
@@ -136,6 +141,8 @@ public class Goon : Enemy
         yield return new WaitForSeconds(0.5f);
 
         isStaggered = false;
+
+        navMeshAgent.enabled = true;
 
         stateMachine.SetState(new Goon_Attacking());
     }
