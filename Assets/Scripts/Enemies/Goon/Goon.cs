@@ -147,6 +147,33 @@ public class Goon : Enemy
 
         navMeshAgent.enabled = true;
 
+        DetectPlayer();
+    }
+
+    private void DetectPlayer()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, GetComponentInChildren<Goon_RetreatRadius>().GetComponent<SphereCollider>().radius);
+
+        foreach (Collider hitCollider in hitColliders)
+        {
+            if (hitCollider.TryGetComponent<Player>(out var _))
+            {
+                stateMachine.SetState(new Goon_Retreating());
+                return;
+            }
+        }
+
+        hitColliders = Physics.OverlapSphere(transform.position, GetComponentInChildren<Goon_ChaseRadius>().GetComponent<SphereCollider>().radius);
+
+        foreach (Collider hitCollider in hitColliders)
+        {
+            if (hitCollider.TryGetComponent<Player>(out var _))
+            {
+                stateMachine.SetState(new Goon_Attacking());
+                return;
+            }
+        }
+
         stateMachine.SetState(new Goon_Attacking());
     }
 }
