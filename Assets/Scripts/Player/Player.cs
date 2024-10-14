@@ -2,6 +2,17 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+/*
+ * to add player to a scene:
+ *     + UI Canvas
+ *     + Camera - assign all orientation to orientation/follow/lookAt
+ *              - Canvas/Crosshair -> crosshair
+ *     + Player - UI Canvas/Health Bar -> healthBar
+ *     
+ * OR:
+ *     + Player Package
+ */
+
 public class Player : Entity
 {
     [Header("Setup")]

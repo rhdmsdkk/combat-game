@@ -1,11 +1,12 @@
 using Cinemachine;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
     public Transform orientation;
-    public Transform player;
+    [NonSerialized] public Transform player;
 
     public CinemachineFreeLook basicCamera;
     public CinemachineVirtualCamera aimedCamera;
@@ -15,6 +16,8 @@ public class ThirdPersonCamera : MonoBehaviour
 
     private void Start()
     {
+        player = FindAnyObjectByType<Player>().transform;
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
