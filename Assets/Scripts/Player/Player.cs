@@ -5,17 +5,14 @@ using UnityEngine;
 public class Player : Entity
 {
     [Header("Setup")]
-    public GameObject playerMesh;
-    public Transform orientation;
-    public Animator animator;
-    public SwitchWeapon weaponHolder;
-    public Transform thirdPersonCamera;
     public HealthBar healthBar;
+    public SkinnedMeshRenderer playerRenderer;
     public AbilityData abilityData;
 
+    [NonSerialized] public SwitchWeapon weaponHolder;
+    [NonSerialized] public Animator animator;
+    [NonSerialized] public Transform thirdPersonCamera;
     [NonSerialized] public Ability[] abilities = new Ability[3];
-
-    private new SkinnedMeshRenderer renderer;
 
     [Header("Attributes")]
     public float runSpeed = 5f;
@@ -42,15 +39,24 @@ public class Player : Entity
 
     private void Awake()
     {
+        InitializeData();
+    }
+
+    public void InitializeData()
+    {
         entityColor = EntityColor.Red;
+
+        weaponHolder = GetComponentInChildren<SwitchWeapon>();
+
+        animator = GetComponentInChildren<Animator>();
 
         abilities[0] = gameObject.AddComponent<HealAbility>();
         abilities[1] = gameObject.AddComponent<DamageAbility>();
 
+        thirdPersonCamera = FindAnyObjectByType<ThirdPersonCamera>().transform;
+
         rb = GetComponent<Rigidbody>();
         currentWeaponType = weaponHolder.transform.GetChild(weaponHolder.currentWeapon).GetComponent<Weapon>().weaponType;
-
-        renderer = playerMesh.GetComponent<SkinnedMeshRenderer>();
 
         movementStateMachine.Initialize(new Player_Input(movementStateMachine, this), new Player_Idle());
 
@@ -153,7 +159,7 @@ public class Player : Entity
     #region Movement
     public void Move()
     {
-        movementDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        movementDirection = thirdPersonCamera.forward * verticalInput + thirdPersonCamera.right * horizontalInput;
 
         movementDirection.y = 0;
 
@@ -196,19 +202,19 @@ public class Player : Entity
     {
         if (entityColor == EntityColor.Red)
         {
-            renderer.material = new Material(colorData.redMat);
+            playerRenderer.material = new Material(colorData.redMat);
 
             weaponHolder.SelectWeapon(0);
         }
         else if (entityColor == EntityColor.Blue)
         {
-            renderer.material = new Material(colorData.blueMat);
+            playerRenderer.material = new Material(colorData.blueMat);
 
             weaponHolder.SelectWeapon(1);
         }
         else if (entityColor == EntityColor.Yellow)
         {
-            renderer.material = new Material(colorData.yellowMat);
+            playerRenderer.material = new Material(colorData.yellowMat);
 
             weaponHolder.SelectWeapon(2);
         }
@@ -256,21 +262,21 @@ public class Player : Entity
         base.TakeDamage(dmg);
         healthBar.SetHealth(health);
 
-        renderer.material = new Material(colorData.flashMaterial);
+        playerRenderer.material = new Material(colorData.flashMaterial);
 
         yield return new WaitForSeconds(0.2f);
 
         if (entityColor == EntityColor.Red)
         {
-            renderer.material = colorData.redMat;
+            playerRenderer.material = colorData.redMat;
         }
         else if (entityColor == EntityColor.Blue)
         {
-            renderer.material = colorData.blueMat;
+            playerRenderer.material = colorData.blueMat;
         }
         else
         {
-            renderer.material = colorData.yellowMat;
+            playerRenderer.material = colorData.yellowMat;
         }
     }
 

@@ -128,6 +128,7 @@ GameObject:
   - component: {fileID: 5757320017672800522}
   - component: {fileID: 3179348343825001148}
   - component: {fileID: 3824419856498209897}
+  - component: {fileID: 3414289269390605274}
   m_Layer: 0
   m_Name: Goon Object
   m_TagString: Untagged
@@ -260,7 +261,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2838505051251179972}
   serializedVersion: 4
-  m_Mass: 0.5
+  m_Mass: 0.3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -279,6 +280,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 1
+--- !u!195 &3414289269390605274
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2838505051251179972}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.50000024
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &3348844465920495443
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,7 +417,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32d1fa407dacc1341b339c08f7409d89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
 --- !u!1 &4273847627298347075
 GameObject:
   m_ObjectHideFlags: 0

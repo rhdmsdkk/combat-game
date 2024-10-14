@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Windows;
 
 public class Goon : Enemy
 {
@@ -40,6 +39,8 @@ public class Goon : Enemy
 
     void Update()
     {
+        Debug.Log(GetComponent<Rigidbody>().velocity);
+
         stateMachine.Update();
     }
 
@@ -141,6 +142,8 @@ public class Goon : Enemy
         yield return new WaitForSeconds(0.5f);
 
         isStaggered = false;
+
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
 
         navMeshAgent.enabled = true;
 
