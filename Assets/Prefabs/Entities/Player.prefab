@@ -167,6 +167,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e427bafcc99682d42965be3736c764ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3809594747982700355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4126593152258261016}
+  m_Layer: 0
+  m_Name: Ability Holder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4126593152258261016
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3809594747982700355}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6274806958202717427}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5213942090720284788
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,6 +265,7 @@ Transform:
   - {fileID: 6651279297864823439}
   - {fileID: 3773798366654030722}
   - {fileID: 3382547922358673350}
+  - {fileID: 4126593152258261016}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4310974931983525489
@@ -253,7 +285,8 @@ MonoBehaviour:
   colorData: {fileID: 11400000, guid: 610bfec5e60406f43b5a29ed2ac9af11, type: 2}
   healthBar: {fileID: 0}
   playerRenderer: {fileID: 8322359956166365660}
-  abilityData: {fileID: 11400000, guid: d81062e9621a5f24ebdd912505b843d3, type: 2}
+  playerData: {fileID: 11400000, guid: b8b5b31891be57845ba0f123265bfb91, type: 2}
+  abilityHolder: {fileID: 4126593152258261016}
   runSpeed: 3.5
   sprintSpeed: 8
   dashForce: 6

@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd88348a75cc0345ad70ba4a782e9c6, type: 3}
+  m_Name: Heal Ability
+  m_EditorClassIdentifier: 
+  abilityName: Heal
+  ability: {fileID: 4373986276811194768, guid: cd952e73c028f3446a579938fce21d43, type: 3}

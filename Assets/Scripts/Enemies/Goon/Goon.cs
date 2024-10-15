@@ -39,8 +39,6 @@ public class Goon : Enemy
 
     void Update()
     {
-        Debug.Log(GetComponent<Rigidbody>().velocity);
-
         stateMachine.Update();
     }
 

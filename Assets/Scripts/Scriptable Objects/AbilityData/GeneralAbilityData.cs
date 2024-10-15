@@ -1,11 +1,8 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "AbilityDataScriptableObject", menuName = "ScriptableObjects/AbilityDataScriptableObject")]
-public class AbilityData : ScriptableObject
+public class GeneralAbilityData : ScriptableObject
 {
-    [Header("General")]
-    public int maxHealth;
-
     [Header("Explode")]
     public float explodeStaggerAmount;
     public int explodeDamage;

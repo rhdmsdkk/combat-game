@@ -4,9 +4,9 @@ using UnityEngine;
 public class SwitchWeapon : MonoBehaviour
 {
     [NonSerialized] public int currentWeapon = 0;
-    void Start()
+
+    public void Initialize()
     {
-        SelectWeapon(0);
         SelectWeapon(currentWeapon);
 
         int i = 0;

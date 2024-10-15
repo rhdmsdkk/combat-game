@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdfbe04f07e09be44837311679fd12f3, type: 3}
+  m_Name: PlayerData
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  abilityData: {fileID: 11400000, guid: d81062e9621a5f24ebdd912505b843d3, type: 2}
+  redAbility: {fileID: 11400000, guid: 6410c617ec8f1184099e47815926d752, type: 2}
+  blueAbility: {fileID: 11400000, guid: 7672a792e69ced04b96d37a330287ca1, type: 2}
+  yellowAbility: {fileID: 0}
+  redWeapon: {fileID: 11400000, guid: a3d2a56a8fac01d4e96033524f1dde0c, type: 2}
+  blueWeapon: {fileID: 11400000, guid: b446e64c165b7d64e91f60b1d594eca2, type: 2}
+  yellowWeapon: {fileID: 0}
+  blankAbility: {fileID: 11400000, guid: 99f288700768aa24783b56f7f98038ef, type: 2}
+  blankWeapon: {fileID: 11400000, guid: adaca371b82dfea4db885bcfdb4781ea, type: 2}

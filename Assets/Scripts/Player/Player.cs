@@ -18,8 +18,10 @@ public class Player : Entity
     [Header("Setup")]
     public HealthBar healthBar;
     public SkinnedMeshRenderer playerRenderer;
-    public AbilityData abilityData;
+    public PlayerData playerData;
+    public Transform abilityHolder;
 
+    [NonSerialized] public GeneralAbilityData abilityData;
     [NonSerialized] public SwitchWeapon weaponHolder;
     [NonSerialized] public Animator animator;
     [NonSerialized] public Transform thirdPersonCamera;
@@ -53,28 +55,6 @@ public class Player : Entity
         InitializeData();
     }
 
-    public void InitializeData()
-    {
-        entityColor = EntityColor.Red;
-
-        weaponHolder = GetComponentInChildren<SwitchWeapon>();
-
-        animator = GetComponentInChildren<Animator>();
-
-        abilities[0] = gameObject.AddComponent<HealAbility>();
-        abilities[1] = gameObject.AddComponent<DamageAbility>();
-
-        thirdPersonCamera = FindAnyObjectByType<ThirdPersonCamera>().transform;
-
-        rb = GetComponent<Rigidbody>();
-        currentWeaponType = weaponHolder.transform.GetChild(weaponHolder.currentWeapon).GetComponent<Weapon>().weaponType;
-
-        movementStateMachine.Initialize(new Player_Input(movementStateMachine, this), new Player_Idle());
-
-        abilityData.maxHealth = health;
-        healthBar.SetHealth(health);
-    }
-
     private void Update()
     {
         movementStateMachine.Update();
@@ -84,6 +64,129 @@ public class Player : Entity
     {
         movementStateMachine.FixedUpdate();
     }
+
+    #region Initialize
+    public void InitializeData()
+    {
+        entityColor = EntityColor.Red;
+
+        abilityData = playerData.abilityData;
+
+        animator = GetComponentInChildren<Animator>();
+
+        weaponHolder = GetComponentInChildren<SwitchWeapon>();
+        weaponHolder.currentWeapon = 0;
+        weaponHolder.Initialize();
+
+        SetAbilities();
+        SetWeapons();
+
+        currentWeaponType = weaponHolder.transform.GetChild(weaponHolder.currentWeapon).GetComponent<Weapon>().weaponType;
+
+        thirdPersonCamera = FindAnyObjectByType<ThirdPersonCamera>().transform;
+
+        rb = GetComponent<Rigidbody>();
+
+        movementStateMachine.Initialize(new Player_Input(movementStateMachine, this), new Player_Idle());
+
+        playerData.maxHealth = health;
+        healthBar.SetHealth(health);
+    }
+
+    public void SetAbilities()
+    {
+        foreach (Transform child in abilityHolder)
+        {
+            Destroy(child.gameObject);
+        }
+
+        Ability redAb;
+        Ability blueAb;
+        Ability yellowAb;
+
+        // add red ability
+        if (playerData.redAbility != null && playerData.redAbility.ability != null)
+        {
+            redAb = Instantiate(playerData.redAbility.ability, abilityHolder).GetComponent<Ability>();
+        }
+        else
+        {
+            redAb = Instantiate(playerData.blankAbility.ability, abilityHolder).GetComponent<Ability>();
+        }
+
+        // add blue ability
+        if (playerData.blueAbility != null && playerData.blueAbility.ability != null)
+        {
+            blueAb = Instantiate(playerData.blueAbility.ability, abilityHolder).GetComponent<Ability>();
+        }
+        else
+        {
+            blueAb = Instantiate(playerData.blankAbility.ability, abilityHolder).GetComponent<Ability>();
+        }
+
+        // add yellow ability
+        if (playerData.yellowAbility != null && playerData.yellowAbility.ability != null)
+        {
+            yellowAb = Instantiate(playerData.yellowAbility.ability, abilityHolder).GetComponent<Ability>();
+        }
+        else
+        {
+            yellowAb = Instantiate(playerData.blankAbility.ability, abilityHolder).GetComponent<Ability>();
+        }
+
+        abilities[0] = redAb;
+        abilities[1] = blueAb;
+        abilities[2] = yellowAb;
+    }
+
+    private void SetWeapons()
+    {
+        foreach (Transform child in weaponHolder.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        Weapon redWeap;
+        Weapon blueWeap;
+        Weapon yellowWeap;
+
+        // add red weapon
+        if (playerData.redWeapon != null && playerData.redWeapon.weapon != null)
+        {
+            redWeap = Instantiate(playerData.redWeapon.weapon, weaponHolder.transform).GetComponent<Weapon>();
+        }
+        else
+        {
+            redWeap = Instantiate(playerData.blankWeapon.weapon, weaponHolder.transform).GetComponent<Weapon>();
+        }
+
+        // add blue weapon
+        if (playerData.blueWeapon != null && playerData.blueWeapon.weapon != null)
+        {
+            blueWeap = Instantiate(playerData.blueWeapon.weapon, weaponHolder.transform).GetComponent<Weapon>();
+        }
+        else
+        {
+            blueWeap = Instantiate(playerData.blankWeapon.weapon, weaponHolder.transform).GetComponent<Weapon>();
+        }
+
+        // add yellow weapon
+        if (playerData.yellowWeapon != null && playerData.yellowWeapon.weapon != null)
+        {
+            yellowWeap = Instantiate(playerData.yellowWeapon.weapon, weaponHolder.transform).GetComponent<Weapon>();
+        }
+        else
+        {
+            yellowWeap = Instantiate(playerData.blankWeapon.weapon, weaponHolder.transform).GetComponent<Weapon>();
+        }
+
+        redWeap.weaponColor = EntityColor.Red;
+        blueWeap.weaponColor = EntityColor.Blue;
+        yellowWeap.weaponColor = EntityColor.Yellow;
+
+        weaponHolder.Initialize();
+    }
+    #endregion
 
     #region General
     protected override void Die()
@@ -102,9 +205,9 @@ public class Player : Entity
 
     public override void Heal(int hp)
     {
-        if (health + hp > abilityData.maxHealth)
+        if (health + hp > playerData.maxHealth)
         {
-            health = abilityData.maxHealth;
+            health = playerData.maxHealth;
             healthBar.SetHealth(health);
             return;
         }

@@ -1,4 +1,4 @@
-public class SphereWeapon : Weapon
+public class BlankWeapon : Weapon
 {
     public override void DoPrimary()
     {
