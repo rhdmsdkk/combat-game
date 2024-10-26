@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   abilityData: {fileID: 11400000, guid: d81062e9621a5f24ebdd912505b843d3, type: 2}
-  redAbility: {fileID: 11400000, guid: 6410c617ec8f1184099e47815926d752, type: 2}
-  blueAbility: {fileID: 11400000, guid: 7672a792e69ced04b96d37a330287ca1, type: 2}
+  redAbility: {fileID: 11400000, guid: 7672a792e69ced04b96d37a330287ca1, type: 2}
+  blueAbility: {fileID: 11400000, guid: 6410c617ec8f1184099e47815926d752, type: 2}
   yellowAbility: {fileID: 0}
   redWeapon: {fileID: 11400000, guid: a3d2a56a8fac01d4e96033524f1dde0c, type: 2}
   blueWeapon: {fileID: 11400000, guid: b446e64c165b7d64e91f60b1d594eca2, type: 2}
